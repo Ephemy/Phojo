@@ -11,6 +11,7 @@
 @interface JVAUploadViewController ()
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
