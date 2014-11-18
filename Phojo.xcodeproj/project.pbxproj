@@ -10,11 +10,17 @@
 		7B24D7A21A1AD1E0001F2236 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A11A1AD1E0001F2236 /* main.m */; };
 		7B24D7A51A1AD1E0001F2236 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A41A1AD1E0001F2236 /* AppDelegate.m */; };
 		7B24D7A81A1AD1E0001F2236 /* Phojo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A61A1AD1E0001F2236 /* Phojo.xcdatamodeld */; };
-		7B24D7AB1A1AD1E0001F2236 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7AA1A1AD1E0001F2236 /* ViewController.m */; };
+		7B24D7AB1A1AD1E0001F2236 /* JVAFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7AA1A1AD1E0001F2236 /* JVAFeedViewController.m */; };
 		7B24D7AE1A1AD1E0001F2236 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B24D7AC1A1AD1E0001F2236 /* Main.storyboard */; };
 		7B24D7B01A1AD1E0001F2236 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B24D7AF1A1AD1E0001F2236 /* Images.xcassets */; };
 		7B24D7B31A1AD1E0001F2236 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B24D7B11A1AD1E0001F2236 /* LaunchScreen.xib */; };
 		7B24D7BF1A1AD1E0001F2236 /* PhojoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7BE1A1AD1E0001F2236 /* PhojoTests.m */; };
+		8D0C9C541A1AD7D3006E7F0C /* JVACommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C9C531A1AD7D3006E7F0C /* JVACommentViewController.m */; };
+		8D0C9C571A1AD835006E7F0C /* JVAProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C9C561A1AD835006E7F0C /* JVAProfileViewController.m */; };
+		8D0C9C5A1A1AD868006E7F0C /* JVAUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C9C591A1AD868006E7F0C /* JVAUploadViewController.m */; };
+		8D0C9C5D1A1AD87C006E7F0C /* JVAUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C9C5C1A1AD87C006E7F0C /* JVAUserListViewController.m */; };
+		8D0C9C601A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C9C5F1A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.m */; };
+		8D0C9C631A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C9C621A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,14 +40,26 @@
 		7B24D7A31A1AD1E0001F2236 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7B24D7A41A1AD1E0001F2236 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7B24D7A71A1AD1E0001F2236 /* Phojo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phojo.xcdatamodel; sourceTree = "<group>"; };
-		7B24D7A91A1AD1E0001F2236 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7B24D7AA1A1AD1E0001F2236 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7B24D7A91A1AD1E0001F2236 /* JVAFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JVAFeedViewController.h; sourceTree = "<group>"; };
+		7B24D7AA1A1AD1E0001F2236 /* JVAFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JVAFeedViewController.m; sourceTree = "<group>"; };
 		7B24D7AD1A1AD1E0001F2236 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7B24D7AF1A1AD1E0001F2236 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7B24D7B21A1AD1E0001F2236 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7B24D7B81A1AD1E0001F2236 /* PhojoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhojoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B24D7BD1A1AD1E0001F2236 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B24D7BE1A1AD1E0001F2236 /* PhojoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhojoTests.m; sourceTree = "<group>"; };
+		8D0C9C521A1AD7D3006E7F0C /* JVACommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVACommentViewController.h; path = ../JVACommentViewController.h; sourceTree = "<group>"; };
+		8D0C9C531A1AD7D3006E7F0C /* JVACommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVACommentViewController.m; path = ../JVACommentViewController.m; sourceTree = "<group>"; };
+		8D0C9C551A1AD835006E7F0C /* JVAProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVAProfileViewController.h; path = ../JVAProfileViewController.h; sourceTree = "<group>"; };
+		8D0C9C561A1AD835006E7F0C /* JVAProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVAProfileViewController.m; path = ../JVAProfileViewController.m; sourceTree = "<group>"; };
+		8D0C9C581A1AD868006E7F0C /* JVAUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVAUploadViewController.h; path = ../JVAUploadViewController.h; sourceTree = "<group>"; };
+		8D0C9C591A1AD868006E7F0C /* JVAUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVAUploadViewController.m; path = ../JVAUploadViewController.m; sourceTree = "<group>"; };
+		8D0C9C5B1A1AD87C006E7F0C /* JVAUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVAUserListViewController.h; sourceTree = "<group>"; };
+		8D0C9C5C1A1AD87C006E7F0C /* JVAUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVAUserListViewController.m; sourceTree = "<group>"; };
+		8D0C9C5E1A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVAPhotoCollectionViewCell.h; path = ../JVAPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		8D0C9C5F1A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVAPhotoCollectionViewCell.m; path = ../JVAPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		8D0C9C611A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVAPostDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		8D0C9C621A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVAPostDetailCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +83,7 @@
 		7B24D7931A1AD1E0001F2236 = {
 			isa = PBXGroup;
 			children = (
+				7B24D7AC1A1AD1E0001F2236 /* Main.storyboard */,
 				7B24D79E1A1AD1E0001F2236 /* Phojo */,
 				7B24D7BB1A1AD1E0001F2236 /* PhojoTests */,
 				7B24D79D1A1AD1E0001F2236 /* Products */,
@@ -85,9 +104,20 @@
 			children = (
 				7B24D7A31A1AD1E0001F2236 /* AppDelegate.h */,
 				7B24D7A41A1AD1E0001F2236 /* AppDelegate.m */,
-				7B24D7A91A1AD1E0001F2236 /* ViewController.h */,
-				7B24D7AA1A1AD1E0001F2236 /* ViewController.m */,
-				7B24D7AC1A1AD1E0001F2236 /* Main.storyboard */,
+				7B24D7A91A1AD1E0001F2236 /* JVAFeedViewController.h */,
+				7B24D7AA1A1AD1E0001F2236 /* JVAFeedViewController.m */,
+				8D0C9C521A1AD7D3006E7F0C /* JVACommentViewController.h */,
+				8D0C9C531A1AD7D3006E7F0C /* JVACommentViewController.m */,
+				8D0C9C551A1AD835006E7F0C /* JVAProfileViewController.h */,
+				8D0C9C561A1AD835006E7F0C /* JVAProfileViewController.m */,
+				8D0C9C581A1AD868006E7F0C /* JVAUploadViewController.h */,
+				8D0C9C591A1AD868006E7F0C /* JVAUploadViewController.m */,
+				8D0C9C5B1A1AD87C006E7F0C /* JVAUserListViewController.h */,
+				8D0C9C5C1A1AD87C006E7F0C /* JVAUserListViewController.m */,
+				8D0C9C5E1A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.h */,
+				8D0C9C5F1A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.m */,
+				8D0C9C611A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.h */,
+				8D0C9C621A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m */,
 				7B24D7AF1A1AD1E0001F2236 /* Images.xcassets */,
 				7B24D7B11A1AD1E0001F2236 /* LaunchScreen.xib */,
 				7B24D7A61A1AD1E0001F2236 /* Phojo.xcdatamodeld */,
@@ -222,10 +252,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D0C9C601A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.m in Sources */,
+				8D0C9C5A1A1AD868006E7F0C /* JVAUploadViewController.m in Sources */,
 				7B24D7A81A1AD1E0001F2236 /* Phojo.xcdatamodeld in Sources */,
 				7B24D7A51A1AD1E0001F2236 /* AppDelegate.m in Sources */,
-				7B24D7AB1A1AD1E0001F2236 /* ViewController.m in Sources */,
+				7B24D7AB1A1AD1E0001F2236 /* JVAFeedViewController.m in Sources */,
 				7B24D7A21A1AD1E0001F2236 /* main.m in Sources */,
+				8D0C9C5D1A1AD87C006E7F0C /* JVAUserListViewController.m in Sources */,
+				8D0C9C631A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m in Sources */,
+				8D0C9C571A1AD835006E7F0C /* JVAProfileViewController.m in Sources */,
+				8D0C9C541A1AD7D3006E7F0C /* JVACommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +290,7 @@
 				7B24D7AD1A1AD1E0001F2236 /* Base */,
 			);
 			name = Main.storyboard;
+			path = Phojo;
 			sourceTree = "<group>";
 		};
 		7B24D7B11A1AD1E0001F2236 /* LaunchScreen.xib */ = {
@@ -418,6 +455,7 @@
 				7B24D7C41A1AD1E0001F2236 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B24D7C51A1AD1E0001F2236 /* Build configuration list for PBXNativeTarget "PhojoTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +464,7 @@
 				7B24D7C71A1AD1E0001F2236 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

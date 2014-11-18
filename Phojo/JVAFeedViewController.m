@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Jonathan Chou. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "JVAFeedViewController.h"
 
-@interface ViewController ()
+@interface JVAFeedViewController ()
 
 @end
 
-@implementation ViewController
+@implementation JVAFeedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
