@@ -20,7 +20,7 @@
 @implementation JVAFeedViewController
 
 - (void)viewDidLoad
-x`{
+{
     [super viewDidLoad];
 
 }
