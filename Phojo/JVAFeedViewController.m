@@ -9,6 +9,7 @@
 #import "JVAFeedViewController.h"
 #import "JVAPhotoCollectionViewCell.h"
 #import "JVAPostDetailCollectionViewCell.h"
+#import <Parse/Parse.h>
 
 @interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -18,9 +19,10 @@
 
 @implementation JVAFeedViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

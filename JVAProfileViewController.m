@@ -14,8 +14,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *followingLabel;
-@property (strong, nonatomic) IBOutlet UILabel *followersLabel;
+@property (strong, nonatomic) IBOutlet UIButton *followingButton;
+@property (strong, nonatomic) IBOutlet UIButton *followersButton;
+
 
 @end
 
@@ -34,6 +35,19 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
+}
+
+- (IBAction)onFollowingButtonPressed:(UIButton *)sender
+{
+    // show list of followed users
+    [self performSegueWithIdentifier:@"userListSegue" sender:sender];
+}
+
+- (IBAction)onFollowersButtonPressed:(UIButton *)sender
+{
+    // show list of followers
+    [self performSegueWithIdentifier:@"userListSegue" sender:sender];
+
 }
 
 @end
