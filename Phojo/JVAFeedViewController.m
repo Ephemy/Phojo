@@ -7,8 +7,12 @@
 //
 
 #import "JVAFeedViewController.h"
+#import "JVAPhotoCollectionViewCell.h"
+#import "JVAPostDetailCollectionViewCell.h"
 
-@interface JVAFeedViewController ()
+@interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -19,9 +23,30 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+
+    return 2;
+
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    JVAPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
+
+    return cell;
+
+}
+
+- (IBAction)unwindFromCommentVC:(UIStoryboardSegue *)sender
+{
+    
 }
 
 @end
