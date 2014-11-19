@@ -24,7 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [PFUser logOut];
+//    [PFUser logOut];
 
 }
 
@@ -36,7 +36,7 @@
         PFLogInViewController *login = [[PFLogInViewController alloc] init];
         login.delegate = self;
         login.signUpController.delegate = self;
-        [self presentModalViewController:login animated:YES];
+        [self presentViewController:login animated:YES completion:nil];
     }
     else{
         [self alertViewStuff];
@@ -87,7 +87,7 @@ shouldBeginLogInWithUsername:(NSString *)username
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
     if(user )
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*!

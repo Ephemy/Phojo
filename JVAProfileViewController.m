@@ -32,43 +32,60 @@
 
     [super viewDidLoad];
 
-    //TODO: need to subclass PFObject and set properties for following code to work
+    self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
 
-    [self.currentPhojer.profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+    [self.currentPhojer fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (error)
         {
             //TODO: error check
         }
         else
         {
-            self.profileImageView.image = [UIImage imageWithData:data];
-        }
 
+
+            //TODO: need to subclass PFObject and set properties for following code to work
+
+            [self.currentPhojer.profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if (error)
+                {
+                    //TODO: error check
+                }
+                else
+                {
+                    self.profileImageView.image = [UIImage imageWithData:data];
+                }
+
+            }];
+
+
+                self.nameLabel.text = self.currentPhojer.name;
+                self.usernameLabel.text = self.currentPhojer.username;
+
+            //TODO: syntax from Core Data. Update with Parse syntax
+
+            PFQuery *query = [Post query];
+
+            [query includeKey:@"photo"];
+
+            [query whereKey:@"poster" equalTo:self.currentPhojer];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                
+                if (error)
+                {
+                    //TODO: error check
+                }
+                else
+                {
+                    self.posts = objects;
+                    [self.collectionView reloadData];
+                }
+                
+            }];
+
+
+
+        }
     }];
-
-    self.nameLabel.text = self.currentPhojer.name;
-    self.usernameLabel.text = self.currentPhojer.username;
-
-    //TODO: syntax from Core Data. Update with Parse syntax
-
-    PFQuery *query = [Post query];
-
-    [query includeKey:@"photo"];
-
-    [query whereKey:@"poster" equalTo:self.currentPhojer];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error)
-        {
-            //TODO: error check
-        }
-        else
-        {
-            self.posts = objects;
-            [self.collectionView reloadData];
-            
-        }
-    }];
-
 
 }
 
