@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B1012821A1C0A29003B9EF3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1012811A1C0A29003B9EF3 /* ParseUI.framework */; };
+		7B1012841A1C0A33003B9EF3 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1012831A1C0A33003B9EF3 /* ParseFacebookUtils.framework */; };
 		7B24D7A21A1AD1E0001F2236 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A11A1AD1E0001F2236 /* main.m */; };
 		7B24D7A51A1AD1E0001F2236 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A41A1AD1E0001F2236 /* AppDelegate.m */; };
 		7B24D7A81A1AD1E0001F2236 /* Phojo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A61A1AD1E0001F2236 /* Phojo.xcdatamodeld */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B1012811A1C0A29003B9EF3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		7B1012831A1C0A33003B9EF3 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		7B24D79C1A1AD1E0001F2236 /* Phojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B24D7A01A1AD1E0001F2236 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B24D7A11A1AD1E0001F2236 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -102,7 +106,9 @@
 				8D3F54341A1B0C7C00FB0CF7 /* CoreGraphics.framework in Frameworks */,
 				8D3F54321A1B0C6600FB0CF7 /* CoreLocation.framework in Frameworks */,
 				8D3F54301A1B0C5E00FB0CF7 /* libz.dylib in Frameworks */,
+				7B1012841A1C0A33003B9EF3 /* ParseFacebookUtils.framework in Frameworks */,
 				8D0C9C781A1B00E6006E7F0C /* MobileCoreServices.framework in Frameworks */,
+				7B1012821A1C0A29003B9EF3 /* ParseUI.framework in Frameworks */,
 				8D0C9C761A1B00CC006E7F0C /* QuartzCore.framework in Frameworks */,
 				8D0C9C741A1B00AC006E7F0C /* Security.framework in Frameworks */,
 				8D0C9C721A1B00A4006E7F0C /* StoreKit.framework in Frameworks */,
@@ -201,6 +207,8 @@
 		8D0C9C641A1B0045006E7F0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B1012831A1C0A33003B9EF3 /* ParseFacebookUtils.framework */,
+				7B1012811A1C0A29003B9EF3 /* ParseUI.framework */,
 				8D3F54371A1B0C9000FB0CF7 /* AudioToolbox.framework */,
 				8D3F54351A1B0C8800FB0CF7 /* CFNetwork.framework */,
 				8D3F54331A1B0C7C00FB0CF7 /* CoreGraphics.framework */,
