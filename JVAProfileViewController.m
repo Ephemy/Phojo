@@ -55,7 +55,7 @@
 
     [query includeKey:@"photo"];
 
-//    [query whereKey:@"poster" equalTo:self.currentPhojer];
+    [query whereKey:@"poster" equalTo:self.currentPhojer];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error)
         {
