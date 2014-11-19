@@ -8,9 +8,11 @@
 
 #import "JVACommentViewController.h"
 
-@interface JVACommentViewController ()
+@interface JVACommentViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *commentViewTable;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (weak, nonatomic) IBOutlet UITableView *userMentionedInComment;
 
 @end
 
@@ -20,6 +22,16 @@
     [super viewDidLoad];
 
     // add save button to nav bar programmatically
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
 }
 
 - (IBAction)onSaveButtonPressed:(UIBarButtonItem *)sender

@@ -375,10 +375,49 @@
                     <view key="view" contentMode="scaleToFill" id="q6J-na-dk8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Jq5-ff-idC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zWI-GY-4zf">
+                                    <rect key="frame" x="0.0" y="130" width="600" height="349"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <prototypes>
+                                        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KaU-mf-reK">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KaU-mf-reK" id="CPB-VF-pxm">
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </tableViewCellContentView>
+                                        </tableViewCell>
+                                    </prototypes>
+                                    <connections>
+                                        <outlet property="dataSource" destination="p5F-XE-mek" id="6D2-yo-zux"/>
+                                        <outlet property="delegate" destination="p5F-XE-mek" id="d2a-Cc-8Y2"/>
+                                    </connections>
+                                </tableView>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="b8u-HI-VqO">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b8u-HI-VqO" id="Wdb-JF-G7Z">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="p5F-XE-mek" id="y11-ot-zzM"/>
+                                    <outlet property="delegate" destination="p5F-XE-mek" id="eNN-kK-TRV"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="commentViewTable" destination="Jq5-ff-idC" id="iIH-fw-ihP"/>
                         <outlet property="saveButton" destination="VuH-IH-A20" id="qNC-Fi-hoj"/>
+                        <outlet property="userMentionedInComment" destination="zWI-GY-4zf" id="zYP-3C-JOe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2R-kF-1Jd" userLabel="First Responder" sceneMemberID="firstResponder"/>
