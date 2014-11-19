@@ -10,4 +10,6 @@
 
 @interface JVAPhotoCollectionViewCell : UICollectionViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *photoImageView;
+
 @end

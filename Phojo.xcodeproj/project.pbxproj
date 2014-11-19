@@ -36,6 +36,11 @@
 		8D3F54341A1B0C7C00FB0CF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3F54331A1B0C7C00FB0CF7 /* CoreGraphics.framework */; };
 		8D3F54361A1B0C8800FB0CF7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3F54351A1B0C8800FB0CF7 /* CFNetwork.framework */; };
 		8D3F54381A1B0C9000FB0CF7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3F54371A1B0C9000FB0CF7 /* AudioToolbox.framework */; };
+		8D3F543B1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F543A1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m */; };
+		8DC3BED51A1C01AC00F29E08 /* Phojer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BED41A1C01AC00F29E08 /* Phojer.m */; };
+		8DC3BED91A1C01E000F29E08 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BED81A1C01E000F29E08 /* Post.m */; };
+		8DC3BEDC1A1C01E500F29E08 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BEDB1A1C01E500F29E08 /* Photo.m */; };
+		8DC3BEDF1A1C01EF00F29E08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BEDE1A1C01EF00F29E08 /* Comment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +95,16 @@
 		8D3F54331A1B0C7C00FB0CF7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D3F54351A1B0C8800FB0CF7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8D3F54371A1B0C9000FB0CF7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8D3F54391A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVAThumbnailCollectionViewCell.h; sourceTree = "<group>"; };
+		8D3F543A1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVAThumbnailCollectionViewCell.m; sourceTree = "<group>"; };
+		8DC3BED31A1C01AC00F29E08 /* Phojer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phojer.h; sourceTree = "<group>"; };
+		8DC3BED41A1C01AC00F29E08 /* Phojer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phojer.m; sourceTree = "<group>"; };
+		8DC3BED71A1C01E000F29E08 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		8DC3BED81A1C01E000F29E08 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		8DC3BEDA1A1C01E500F29E08 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		8DC3BEDB1A1C01E500F29E08 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		8DC3BEDD1A1C01EF00F29E08 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		8DC3BEDE1A1C01EF00F29E08 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,9 +179,12 @@
 				8D0C9C5F1A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.m */,
 				8D0C9C611A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.h */,
 				8D0C9C621A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m */,
+				8D3F54391A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.h */,
+				8D3F543A1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m */,
 				7B24D7AF1A1AD1E0001F2236 /* Images.xcassets */,
 				7B24D7B11A1AD1E0001F2236 /* LaunchScreen.xib */,
 				7B24D7A61A1AD1E0001F2236 /* Phojo.xcdatamodeld */,
+				8DC3BED61A1C01B600F29E08 /* Model */,
 				7B24D79F1A1AD1E0001F2236 /* Supporting Files */,
 			);
 			path = Phojo;
@@ -219,6 +237,21 @@
 			);
 			name = Frameworks;
 			path = Phojo;
+			sourceTree = "<group>";
+		};
+		8DC3BED61A1C01B600F29E08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DC3BED31A1C01AC00F29E08 /* Phojer.h */,
+				8DC3BED41A1C01AC00F29E08 /* Phojer.m */,
+				8DC3BED71A1C01E000F29E08 /* Post.h */,
+				8DC3BED81A1C01E000F29E08 /* Post.m */,
+				8DC3BEDA1A1C01E500F29E08 /* Photo.h */,
+				8DC3BEDB1A1C01E500F29E08 /* Photo.m */,
+				8DC3BEDD1A1C01EF00F29E08 /* Comment.h */,
+				8DC3BEDE1A1C01EF00F29E08 /* Comment.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,15 +354,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DC3BEDC1A1C01E500F29E08 /* Photo.m in Sources */,
+				8DC3BED91A1C01E000F29E08 /* Post.m in Sources */,
 				8D0C9C601A1ADE90006E7F0C /* JVAPhotoCollectionViewCell.m in Sources */,
 				8D0C9C5A1A1AD868006E7F0C /* JVAUploadViewController.m in Sources */,
 				7B24D7A81A1AD1E0001F2236 /* Phojo.xcdatamodeld in Sources */,
 				7B24D7A51A1AD1E0001F2236 /* AppDelegate.m in Sources */,
 				7B24D7AB1A1AD1E0001F2236 /* JVAFeedViewController.m in Sources */,
 				7B24D7A21A1AD1E0001F2236 /* main.m in Sources */,
+				8D3F543B1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m in Sources */,
+				8DC3BED51A1C01AC00F29E08 /* Phojer.m in Sources */,
 				8D0C9C5D1A1AD87C006E7F0C /* JVAUserListViewController.m in Sources */,
 				8D0C9C631A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m in Sources */,
 				8D0C9C571A1AD835006E7F0C /* JVAProfileViewController.m in Sources */,
+				8DC3BEDF1A1C01EF00F29E08 /* Comment.m in Sources */,
 				8D0C9C541A1AD7D3006E7F0C /* JVACommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

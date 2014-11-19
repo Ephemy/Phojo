@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+
+@class Phojer;
 
 @interface JVAProfileViewController : UIViewController
+
+@property Phojer *currentPhojer;
 
 @end
