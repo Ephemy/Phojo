@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Post;
+
 @interface JVACommentViewController : UIViewController
+
+@property Post *currentPost;
 
 @end

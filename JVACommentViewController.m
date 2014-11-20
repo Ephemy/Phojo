@@ -25,8 +25,6 @@
 @property NSArray *phojerArray;
 @property int originalStringIndex;
 @property NSString *stringToEdit;
-@property Post *currentPost;
-
 
 @end
 
@@ -207,8 +205,8 @@
         self.stringToEdit = string;
         
         //save previous data before continuing
-        NSString *subString = [string substringToIndex: self.originalStringIndex - 1];
-        
+//        NSString *subString = [string substringToIndex: self.originalStringIndex - 1];
+
         //maybe I'll also save the index right here.
         
         
