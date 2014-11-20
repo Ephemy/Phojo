@@ -129,6 +129,13 @@
                                             <constraint firstItem="v4Y-yl-qO3" firstAttribute="top" secondItem="x05-be-psp" secondAttribute="bottom" constant="10" id="uTA-Rf-byz"/>
                                             <constraint firstItem="x05-be-psp" firstAttribute="top" secondItem="I7O-n1-USK" secondAttribute="bottom" constant="3" id="ug9-v2-mnC"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="captionWebView" destination="x05-be-psp" id="jCC-8l-Idf"/>
+                                            <outlet property="commentButton" destination="6eY-Yq-qW6" id="7fW-fJ-8Xs"/>
+                                            <outlet property="commentWebView" destination="v4Y-yl-qO3" id="zDM-r2-dYZ"/>
+                                            <outlet property="flagButton" destination="col-Bo-CHf" id="eUZ-Ah-iLy"/>
+                                            <outlet property="userButton" destination="I7O-n1-USK" id="HC1-QH-gb7"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -493,11 +500,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="matchCell" id="n7R-Lq-5kz">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="matchCell" textLabel="qIE-28-IcI" detailTextLabel="0Cm-5P-ROa" style="IBUITableViewCellStyleSubtitle" id="n7R-Lq-5kz">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n7R-Lq-5kz" id="NyX-i9-kh6">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qIE-28-IcI">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Cm-5P-ROa">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>

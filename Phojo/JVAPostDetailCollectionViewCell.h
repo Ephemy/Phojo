@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface JVAPostDetailCollectionViewCell : UICollectionViewCell
+@property (strong, nonatomic) IBOutlet UIButton *userButton;
+@property (strong, nonatomic) IBOutlet UIButton *flagButton;
+@property (strong, nonatomic) IBOutlet UIButton *commentButton;
+@property (strong, nonatomic) IBOutlet UIWebView *captionWebView;
+@property (strong, nonatomic) IBOutlet UIWebView *commentWebView;
 
 @end
