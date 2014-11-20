@@ -7,14 +7,16 @@
 //
 
 #import "JVAUserListViewController.h"
+#import "JVAProfileViewController.h"
 #import "Phojer.h"
 
-@interface JVAUserListViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface JVAUserListViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
-@property NSArray *phojers;
+@property NSMutableArray *phojers;
+@property NSArray *phojersFollowed;
 
 @end
 
@@ -32,13 +34,16 @@
 {
     [super viewDidLoad];
 
-    Phojer *currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
+    self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
+    self.tabBarController.delegate = self;
 
     // query for phojers current phojer is following
     if (self.showFollowing)
     {
 
-        PFRelation *following = [currentPhojer relationForKey:@"following"];
+        PFRelation *following = [self.currentPhojer relationForKey:@"following"];
         PFQuery *followingQuery = [following query];
 
         [followingQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -49,7 +54,8 @@
             }
             else
             {
-                self.phojers = objects;
+                self.phojers = [objects mutableCopy];
+                self.phojersFollowed = self.phojers;
                 [self.tableView reloadData];
             }
 
@@ -61,7 +67,8 @@
     {
 
         PFQuery *followersQuery = [Phojer query];
-        [followersQuery whereKey:@"following" equalTo:currentPhojer];
+        
+        [followersQuery whereKey:@"following" equalTo:self.currentPhojer];
 
         [followersQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
@@ -71,7 +78,7 @@
             }
             else
             {
-                self.phojers = objects;
+                self.phojers = [objects mutableCopy];
                 [self.tableView reloadData];
             }
 
@@ -81,14 +88,106 @@
 
 }
 
+#pragma mark - table view methods
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return self.phojers.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    Phojer *phojer = self.phojers[indexPath.row];
+    cell.textLabel.text = phojer.name;
+    cell.detailTextLabel.text = phojer.username;
+
+    return cell;
+}
+
+#pragma mark - seach bar delegates
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+
+    if ([searchText isEqualToString:@""])
+    {
+        self.phojers = [self.phojersFollowed mutableCopy];
+        [self.tableView reloadData];
+    }
+    else
+    {
+
+        PFQuery *nameQuery = [Phojer query];
+        [nameQuery whereKey:@"name" containsString:searchText];
+
+        PFQuery *usernameQuery = [Phojer query];
+        [usernameQuery whereKey:@"username" containsString:searchText];
+
+        PFQuery *query = [PFQuery orQueryWithSubqueries:@[nameQuery, usernameQuery]];
+
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error)
+            {
+                //TODO: error check
+            }
+            else
+            {
+                self.phojers = [objects mutableCopy];
+                [self.tableView reloadData];
+            }
+        }];
+
+    }
+
+}
+
+#pragma mark - tab bar methods
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    JVAProfileViewController *vc = viewController.childViewControllers.firstObject;
+
+    if ([vc isEqual:self])
+    {
+        [self.view addSubview:self.searchBar];
+        CGFloat offsetFromTop = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+        self.searchBar.frame = CGRectMake(0, offsetFromTop, [UIScreen mainScreen].bounds.size.width, self.searchBar.frame.size.height);
+        self.tableView.contentInset = UIEdgeInsetsMake(self.searchBar.frame.size.height, 0, 0, 0);
+
+        self.showFollowing = YES;
+    }
+
+}
+
+#pragma mark - helper methods
+
+- (void)returnSearchResults
+{
+
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+    UINavigationController *navVC = segue.destinationViewController;
+
+    JVAProfileViewController *vc = navVC.childViewControllers.firstObject;
+
+    Phojer *selectedPhojer = [Phojer object];
+
+    if ([self.searchBar.text isEqualToString:@""])
+    {
+        selectedPhojer = self.phojersFollowed[[self.tableView indexPathForSelectedRow].row];
+    }
+    else
+    {
+        selectedPhojer = self.phojers[[self.tableView indexPathForSelectedRow].row];
+    }
+
+    vc.viewedPhojer = selectedPhojer;
+
 }
 
 @end
