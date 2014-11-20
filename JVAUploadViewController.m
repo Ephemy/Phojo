@@ -11,6 +11,7 @@
 #import "Phojer.h"
 #import "Post.h"
 #import "Photo.h"
+#import "JVAProfileViewController.h"
 @interface JVAUploadViewController ()<UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
@@ -35,7 +36,7 @@
         [myAlertView show];
         
     }
-
+    
     self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
 }
 
@@ -43,11 +44,22 @@
 {
     [super viewDidAppear:animated];
     
-    if (!self.appeared || [self isMovingToParentViewController] || [self isBeingPresented]) {
+    if (!self.appeared || [self isMovingToParentViewController] || [self isBeingPresented])
+    {
         self.appeared = YES;
-        [self takePhotoAppears];
+        [self choosePhotoFromLibrary];
+        self.captionTextView.text = [NSString stringWithFormat:@" "];
     }
+    else
+    {
+
+        self.appeared = NO;
+        
+    }
+        
+    
 }
+
 - (IBAction)onUploadButtonPressed:(UIButton *)sender
 {
 
@@ -77,9 +89,13 @@
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
             }];
+            self.tabBarController.selectedIndex = 3;
+            
+            
         }
     }];
-    
+//    JVAProfileViewController *vc = [[JVAProfileViewController alloc]init];
+//    [self pushViewController:vc animated:YES];
 }
 
 -(void)takePhotoAppears
