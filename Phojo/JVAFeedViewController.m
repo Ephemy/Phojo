@@ -24,7 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [PFUser logOut];
+    [PFUser logOut];
 
 }
 
@@ -39,7 +39,7 @@
         [self presentViewController:login animated:YES completion:nil];
     }
     else{
-        [self alertViewStuff];
+//        [self alertViewStuff];
     }
 }
 

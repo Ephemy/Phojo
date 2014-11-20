@@ -7,11 +7,14 @@
 //
 
 #import "JVAUserListViewController.h"
+#import "Phojer.h"
 
 @interface JVAUserListViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property NSArray *phojers;
 
 @end
 
@@ -25,9 +28,57 @@
  Tapping on a collection view cell should take you to single post detail view (feed scene).
  */
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    Phojer *currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
+
+    // query for phojers current phojer is following
+    if (self.showFollowing)
+    {
+
+        PFRelation *following = [currentPhojer relationForKey:@"following"];
+        PFQuery *followingQuery = [following query];
+
+        [followingQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+            if (error)
+            {
+                //TODO: check error
+            }
+            else
+            {
+                self.phojers = objects;
+                [self.tableView reloadData];
+            }
+
+        }];
+    }
+
+    // query for phojers following current phojer
+    else
+    {
+
+        PFQuery *followersQuery = [Phojer query];
+        [followersQuery whereKey:@"following" equalTo:currentPhojer];
+
+        [followersQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+            if (error)
+            {
+                //TODO: check error
+            }
+            else
+            {
+                self.phojers = objects;
+                [self.tableView reloadData];
+            }
+
+        }];
+
+    }
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
