@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class Phojer;
 @class Post;
-
 @interface JVAFeedViewController : UIViewController
-
 @property Post *passedPost;
-
+@property Phojer *currentPhojer;
 @end
 

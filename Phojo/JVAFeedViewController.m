@@ -11,12 +11,16 @@
 #import "JVAPostDetailCollectionViewCell.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "Post.h"
+#import "Photo.h"
+#import "Phojer.h"
 @import Social;
 
 @interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
-
+@property (strong, nonatomic) NSArray *postArray;
+@property (strong, nonatomic) NSArray *followingArray;
 @end
 
 @implementation JVAFeedViewController
@@ -25,7 +29,9 @@
 {
     [super viewDidLoad];
 //    [PFUser logOut];
-
+    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -41,6 +47,9 @@
     else{
 //        [self alertViewStuff];
     }
+    
+    [self queryAndLoad];
+    
 }
 
 -(void)alertViewStuff
@@ -56,7 +65,54 @@
     
 }
 
+- (void)queryAndLoad
+{
+   
+    //1 - get the array of followers
+    PFRelation *followingRelation = [self.currentPhojer relationForKey:@"following"];
+    PFQuery *followersQuery = [followingRelation query];
+    
+    [followersQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+            NSLog(@"%@",error.localizedDescription);
+        }
+        else
+        {
+            self.followingArray = objects;
+            
+            
+            //2. Find posts where the poster is contained in our following array
+            PFQuery *postsQuery = [Post query];
+            [postsQuery whereKey:@"poster" containedIn:self.followingArray];
+            [postsQuery includeKey:@"photo"];
+            
+            
+            [postsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                
+                if (error)
+                {
+                    NSLog(@"error! %@",error.localizedDescription);
+                }
+                else
+                {
+                    self.postArray = objects;
+                    [self.collectionView reloadData];
+                }
+                
+            }];
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+    }];
 
+}
 
 
 
@@ -182,35 +238,63 @@ shouldBeginLogInWithUsername:(NSString *)username
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 0;
+    return self.postArray.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 
-    return 0;
+    return self.postArray.count;
 
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    Post *post = self.postArray[indexPath.row];
 
-//    Post *post = self.posts[indexPath.section];
-//    
+    Photo *photo = post.photo;
+    PFFile *imageFile = photo.image;
+//    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+//        if (error)
+//        {
+//            //TODO: error check
+//        }
+//        else
+//        {
+//            cell.thumbnailImageView.image = [UIImage imageWithData:data];
+//        }
+
+
+    
 //    if (indexPath.row == 0)
 //    {
-//        JVAPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
-//        
-//        cell.photoImageView.image = post.image;
-//    }
+        JVAPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+        {
+            if (error)
+            {
+                NSLog(@"Error! %@",error.localizedDescription);
+            }
+            else
+            {
+                cell.photoImageView.image = [UIImage imageWithData:data];
+            }
+        }];
+            return cell;
+        
+        
+
+    }
 //    else
 //    {
-//        JVAPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
+//        JVAPhotoCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
+//        detailCell.c
+//        return detailCell;
 //    }
-    //DONT FORGET TO UPDATE *CELL********
-    return nil;
+//    
+    
 
-}
+
 
 - (IBAction)unwindFromCommentVC:(UIStoryboardSegue *)sender
 {
