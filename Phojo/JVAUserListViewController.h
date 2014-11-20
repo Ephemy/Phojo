@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Phojer;
+
 @interface JVAUserListViewController : UIViewController
 
+@property Phojer *currentPhojer;
 @property BOOL showFollowing;
 
 @end

@@ -22,7 +22,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *followingButton;
 @property (strong, nonatomic) IBOutlet UIButton *followersButton;
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
+@property Phojer *currentPhojer;
 @property NSArray *posts;
+@property BOOL isFollowing;
 
 
 @end
@@ -38,6 +40,19 @@
 
     self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
 
+    if (self.tabBarController.selectedIndex == 3)
+    {
+        self.viewedPhojer = self.currentPhojer;
+
+        [self.followButton setHidden:YES];
+    }
+
+    if (self.viewedPhojer == self.currentPhojer)
+    {
+        self.tabBarController.selectedIndex = 3;
+    }
+
+    self.followButton.titleLabel.text = @"HHH";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -45,7 +60,8 @@
 
     [super viewWillAppear:animated];
 
-    [self.currentPhojer fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+
+    [self.viewedPhojer fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (error)
         {
             //TODO: error check
@@ -55,7 +71,7 @@
 
             //TODO: need to subclass PFObject and set properties for following code to work
 
-            [self.currentPhojer.profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            [self.viewedPhojer.profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                 if (error)
                 {
                     //TODO: error check
@@ -67,8 +83,8 @@
 
             }];
 
-            self.nameLabel.text = self.currentPhojer.name;
-            self.usernameLabel.text = self.currentPhojer.username;
+            self.nameLabel.text = self.viewedPhojer.name;
+            self.usernameLabel.text = self.viewedPhojer.username;
 
             //TODO: syntax from Core Data. Update with Parse syntax
 
@@ -76,7 +92,7 @@
 
             [query includeKey:@"photo"];
 
-            [query whereKey:@"poster" equalTo:self.currentPhojer];
+            [query whereKey:@"poster" equalTo:self.viewedPhojer];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
                 if (error)
@@ -93,7 +109,34 @@
             
         }
     }];
-    
+
+
+    [self getFollowers:self.currentPhojer withCompletion:^(NSArray *followers) {
+        if ([followers containsObject:self.viewedPhojer])
+        {
+            self.isFollowing = YES;
+        }
+        else
+        {
+            self.isFollowing = NO;
+        }
+
+        [self setFollowButtonText];
+    }];
+
+    [self getFollowers:self.viewedPhojer withCompletion:^(NSArray *followers) {
+
+        [self.followersButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)followers.count] forState:UIControlStateNormal];
+
+    }];
+
+    [self getFollowing:self.viewedPhojer withCompletion:^(NSArray *following) {
+
+        [self.followingButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)following.count] forState:UIControlStateNormal];
+
+    }];
+
+
 }
 
 
@@ -133,6 +176,66 @@
     // pass post and segue to feed view
 }
 
+#pragma mark - helper methods
+
+- (void)getFollowers:(Phojer *)phojer withCompletion:(void (^)(NSArray *followers))complete
+{
+
+    PFQuery *followersQuery = [Phojer query];
+    [followersQuery whereKey:@"following" equalTo:phojer];
+
+    [followersQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+        if (error)
+        {
+            //TODO: check error
+        }
+        else
+        {
+
+            complete(objects);
+
+        }
+
+    }];
+
+
+}
+
+- (void)getFollowing:(Phojer *)phojer withCompletion:(void (^)(NSArray *following))complete
+{
+
+    PFRelation *following = [phojer relationForKey:@"following"];
+    PFQuery *followingQuery = [following query];
+    [followingQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+        if (error)
+        {
+            //TODO: error check
+        }
+        else
+        {
+            complete(objects);
+        }
+        
+    }];
+
+}
+
+- (void)setFollowButtonText
+{
+
+    if (self.isFollowing == YES)
+    {
+        [self.followButton setTitle:@"UNFOLLOW" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.followButton setTitle:@"FOLLOW" forState:UIControlStateNormal];
+    }
+
+}
+
 #pragma mark - IBActions
 
 - (IBAction)onFollowingButtonPressed:(UIButton *)sender
@@ -141,10 +244,30 @@
     [self performSegueWithIdentifier:@"userListSegue" sender:sender];
 }
 
-- (IBAction)onFollowersButtonPressed:(UIButton *)sender
+//- (IBAction)onFollowersButtonPressed:(UIButton *)sender
+//{
+//    // show list of followers
+//    [self performSegueWithIdentifier:@"userListSegue" sender:sender];
+//
+//}
+
+- (IBAction)onFollowButtonPressed:(UIButton *)sender
 {
-    // show list of followers
-    [self performSegueWithIdentifier:@"userListSegue" sender:sender];
+    PFRelation *following = [self.currentPhojer relationForKey:@"following"];
+
+    if (self.isFollowing == YES)
+    {
+        [following removeObject:self.viewedPhojer];
+        self.isFollowing = NO;
+    }
+    else
+    {
+        [following addObject:self.viewedPhojer];
+        self.isFollowing = YES;
+    }
+
+    [self.currentPhojer saveInBackground];
+    [self setFollowButtonText];
 
 }
 
