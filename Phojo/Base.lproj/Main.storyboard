@@ -377,6 +377,13 @@
                                     <constraint firstAttribute="width" constant="300" id="rkA-W6-CvC"/>
                                 </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CBg-IS-MUf">
+                                <rect key="frame" x="180" y="328" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -388,6 +395,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Photo" id="eB9-ig-ym9"/>
                     <connections>
+                        <outlet property="captionTextView" destination="CBg-IS-MUf" id="VE4-m7-MsL"/>
                         <outlet property="imageView" destination="61K-vb-S7q" id="qJE-7C-9FG"/>
                         <outlet property="uploadButton" destination="CaL-q5-yrj" id="GNY-o6-VAC"/>
                     </connections>

@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UITextView *captionTextView;
 @property BOOL appeared;
 @property Phojer *currentPhojer;
 @end
