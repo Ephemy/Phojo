@@ -9,6 +9,7 @@
 #import "JVAProfileViewController.h"
 #import "JVAThumbnailCollectionViewCell.h"
 #import "JVAUserListViewController.h"
+#import "JVAFeedViewController.h"
 #import "Phojer.h"
 #import "Post.h"
 #import "Photo.h"
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *followersButton;
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
 @property Phojer *currentPhojer;
+@property Phojer *viewedPhojer;
 @property NSArray *posts;
 @property BOOL isFollowing;
 
@@ -37,22 +39,39 @@
     [super viewDidLoad];
 
     self.collectionView.backgroundColor = [UIColor clearColor];
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
 
     self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
 
-    if (self.tabBarController.selectedIndex == 3)
+    if (self.passedPhojer)
+    {
+        self.viewedPhojer = self.passedPhojer;
+        // check if following
+
+        [self getFollowing:self.currentPhojer withCompletion:^(NSArray *following) {
+
+            for (Phojer *phojer in following)
+            {
+                if ([phojer.objectId isEqualToString:self.viewedPhojer.objectId])
+                {
+                    self.isFollowing = YES;
+                    [self setFollowButtonText];
+                    break;
+                }
+            }
+
+        }];
+    }
+    else
     {
         self.viewedPhojer = self.currentPhojer;
+    }
 
+    if ([self.viewedPhojer.objectId isEqualToString:self.currentPhojer.objectId])
+    {
         [self.followButton setHidden:YES];
     }
 
-    if (self.viewedPhojer == self.currentPhojer)
-    {
-        self.tabBarController.selectedIndex = 3;
-    }
-
-    self.followButton.titleLabel.text = @"HHH";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -69,7 +88,7 @@
         else
         {
 
-            //TODO: need to subclass PFObject and set properties for following code to work
+            // get profile image
 
             [self.viewedPhojer.profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                 if (error)
@@ -85,8 +104,6 @@
 
             self.nameLabel.text = self.viewedPhojer.name;
             self.usernameLabel.text = self.viewedPhojer.username;
-
-            //TODO: syntax from Core Data. Update with Parse syntax
 
             PFQuery *query = [Post query];
 
@@ -111,19 +128,26 @@
     }];
 
 
-    [self getFollowers:self.currentPhojer withCompletion:^(NSArray *followers) {
-        if ([followers containsObject:self.viewedPhojer])
-        {
-            self.isFollowing = YES;
-        }
-        else
-        {
-            self.isFollowing = NO;
-        }
+    // set follow button
 
-        [self setFollowButtonText];
-    }];
+    if (![self.currentPhojer.objectId isEqualToString:self.viewedPhojer.objectId])
+    {
+        [self getFollowers:self.currentPhojer withCompletion:^(NSArray *followers) {
+            if ([followers containsObject:self.viewedPhojer])
+            {
+                self.isFollowing = YES;
+            }
+            else
+            {
+                self.isFollowing = NO;
+            }
 
+            [self setFollowButtonText];
+        }];
+
+    }
+
+    // set follower/following count
     [self getFollowers:self.viewedPhojer withCompletion:^(NSArray *followers) {
 
         [self.followersButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)followers.count] forState:UIControlStateNormal];
@@ -133,9 +157,8 @@
     [self getFollowing:self.viewedPhojer withCompletion:^(NSArray *following) {
 
         [self.followingButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)following.count] forState:UIControlStateNormal];
-
+        
     }];
-
 
 }
 
@@ -277,15 +300,31 @@
 {
 
     UINavigationController *navVC = segue.destinationViewController;
-    JVAUserListViewController *vc = navVC.childViewControllers.firstObject;
 
-    if ([sender isEqual:self.followingButton])
+    if ([segue.identifier isEqualToString:@"userListSegue"])
     {
-        vc.showFollowing = YES;
+        JVAUserListViewController *vc = navVC.childViewControllers.firstObject;
+
+        if ([sender isEqual:self.followingButton])
+        {
+            vc.showFollowing = YES;
+        }
+        else
+        {
+            vc.showFollowing = NO;
+        }
+
+        vc.passedPhojer = self.viewedPhojer;
     }
     else
     {
-        vc.showFollowing = NO;
+        JVAFeedViewController *vc = navVC.childViewControllers.firstObject;
+        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+        NSInteger index = [[indexPaths firstObject] row];
+
+        Post *post = self.posts[index];
+        vc.passedPost = post;
+
     }
 
 }

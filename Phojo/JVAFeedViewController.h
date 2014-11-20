@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Post;
+
 @interface JVAFeedViewController : UIViewController
 
+@property Post *passedPost;
 
 @end
 

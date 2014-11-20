@@ -141,8 +141,8 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Nzu-Lq-tSP">
                                 <rect key="frame" x="0.0" y="237" width="600" height="363"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Z9V-B4-K3R">
-                                    <size key="itemSize" width="100" height="100"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="2" id="Z9V-B4-K3R">
+                                    <size key="itemSize" width="120" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -152,11 +152,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RAd-yW-iph">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RAd-yW-iph">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -169,6 +169,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="thumbnailImageView" destination="RAd-yW-iph" id="KXG-uI-vi8"/>
+                                            <segue destination="4C2-xv-GMN" kind="show" identifier="postSegue" id="P0i-x4-inb"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -177,7 +178,7 @@
                                     <outlet property="delegate" destination="gsx-iF-hhc" id="kdT-qt-hxz"/>
                                 </connections>
                             </collectionView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="da0-40-RpM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="da0-40-RpM">
                                 <rect key="frame" x="16" y="72" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="7Yh-ct-cto"/>
@@ -281,7 +282,7 @@
                             <constraint firstItem="NG3-ut-MyE" firstAttribute="leading" secondItem="da0-40-RpM" secondAttribute="trailing" constant="18" id="3dg-8U-9Pj"/>
                             <constraint firstItem="19K-pQ-6nL" firstAttribute="leading" secondItem="AEm-La-u2d" secondAttribute="trailing" constant="8" id="3hx-VZ-wcF"/>
                             <constraint firstItem="bvz-70-diu" firstAttribute="top" secondItem="NG3-ut-MyE" secondAttribute="bottom" constant="8" id="6oN-uO-MyA"/>
-                            <constraint firstItem="80u-EP-LtJ" firstAttribute="top" secondItem="Nzu-Lq-tSP" secondAttribute="bottom" constant="-49" id="9OA-94-i90"/>
+                            <constraint firstItem="80u-EP-LtJ" firstAttribute="top" secondItem="Nzu-Lq-tSP" secondAttribute="bottom" id="9OA-94-i90"/>
                             <constraint firstItem="bvz-70-diu" firstAttribute="top" secondItem="NG3-ut-MyE" secondAttribute="bottom" constant="8" id="EEf-mg-cW8"/>
                             <constraint firstItem="da0-40-RpM" firstAttribute="leading" secondItem="xjg-Re-vDj" secondAttribute="leadingMargin" id="Fr8-pJ-eDs"/>
                             <constraint firstItem="hI8-7J-Mj3" firstAttribute="bottom" secondItem="da0-40-RpM" secondAttribute="bottom" id="FwX-KC-x43"/>
@@ -631,8 +632,12 @@
             <point key="canvasLocation" x="1467" y="939"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="default" width="430" height="430"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d6y-rz-tKK"/>
+        <segue reference="P0i-x4-inb"/>
         <segue reference="D9l-pO-1jH"/>
+        <segue reference="OLX-J7-kqY"/>
     </inferredMetricsTieBreakers>
 </document>
