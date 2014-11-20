@@ -8,6 +8,7 @@
 
 #import "JVAProfileViewController.h"
 #import "JVAThumbnailCollectionViewCell.h"
+#import "JVAUserListViewController.h"
 #import "Phojer.h"
 #import "Post.h"
 #import "Photo.h"
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *followingButton;
 @property (strong, nonatomic) IBOutlet UIButton *followersButton;
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
 @property NSArray *posts;
 
 
@@ -32,49 +34,76 @@
 
     [super viewDidLoad];
 
-    //TODO: need to subclass PFObject and set properties for following code to work
+    self.collectionView.backgroundColor = [UIColor clearColor];
 
-    [self.currentPhojer.profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        if (error)
-        {
-            //TODO: error check
-        }
-        else
-        {
-            self.profileImageView.image = [UIImage imageWithData:data];
-        }
-
-    }];
-
-    self.nameLabel.text = self.currentPhojer.name;
-    self.usernameLabel.text = self.currentPhojer.username;
-
-    //TODO: syntax from Core Data. Update with Parse syntax
-
-    PFQuery *query = [Post query];
-
-    [query includeKey:@"photo"];
-
-    [query whereKey:@"poster" equalTo:self.currentPhojer];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error)
-        {
-            //TODO: error check
-        }
-        else
-        {
-            self.posts = objects;
-            [self.collectionView reloadData];
-            
-        }
-    }];
-
+    self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+
+    [super viewWillAppear:animated];
+
+    [self.currentPhojer fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (error)
+        {
+            //TODO: error check
+        }
+        else
+        {
+
+            //TODO: need to subclass PFObject and set properties for following code to work
+
+            [self.currentPhojer.profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if (error)
+                {
+                    //TODO: error check
+                }
+                else
+                {
+                    self.profileImageView.image = [UIImage imageWithData:data];
+                }
+
+            }];
+
+            self.nameLabel.text = self.currentPhojer.name;
+            self.usernameLabel.text = self.currentPhojer.username;
+
+            //TODO: syntax from Core Data. Update with Parse syntax
+
+            PFQuery *query = [Post query];
+
+            [query includeKey:@"photo"];
+
+            [query whereKey:@"poster" equalTo:self.currentPhojer];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+                if (error)
+                {
+                    //TODO: error check
+                }
+                else
+                {
+                    self.posts = objects;
+                    [self.collectionView reloadData];
+                }
+                
+            }];
+            
+        }
+    }];
+    
+}
+
+
+#pragma mark - collection view methods
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+
     return self.posts.count;
+
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -99,6 +128,13 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // pass post and segue to feed view
+}
+
+#pragma mark - IBActions
+
 - (IBAction)onFollowingButtonPressed:(UIButton *)sender
 {
     // show list of followed users
@@ -109,6 +145,25 @@
 {
     // show list of followers
     [self performSegueWithIdentifier:@"userListSegue" sender:sender];
+
+}
+
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+    UINavigationController *navVC = segue.destinationViewController;
+    JVAUserListViewController *vc = navVC.childViewControllers.firstObject;
+
+    if ([sender isEqual:self.followingButton])
+    {
+        vc.showFollowing = YES;
+    }
+    else
+    {
+        vc.showFollowing = NO;
+    }
 
 }
 

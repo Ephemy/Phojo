@@ -10,4 +10,6 @@
 
 @interface JVAUserListViewController : UIViewController
 
+@property BOOL showFollowing;
+
 @end
