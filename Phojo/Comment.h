@@ -17,5 +17,6 @@
 @property Phojer *author;
 @property NSArray *taggedPhojers;
 @property Post *post;
+@property NSString *commentText;
 
 @end

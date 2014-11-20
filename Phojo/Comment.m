@@ -14,6 +14,7 @@
 @dynamic author;
 @dynamic taggedPhojers;
 @dynamic post;
+@dynamic commentText;
 
 + (void)load
 {

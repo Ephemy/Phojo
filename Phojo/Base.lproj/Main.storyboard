@@ -118,7 +118,20 @@
                             <constraint firstAttribute="trailing" secondItem="oc5-GU-pbg" secondAttribute="trailing" id="ooT-Yo-BUJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="66z-46-Ih2"/>
+                    <navigationItem key="navigationItem" id="66z-46-Ih2">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="F0d-tG-5gI">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nON-EE-Xxt">
+                                <rect key="frame" x="-23" y="-15" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Comments">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="p5F-XE-mek" kind="show" id="ZUg-2d-Wow"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="oc5-GU-pbg" id="pdN-a2-TL4"/>
                     </connections>
@@ -139,10 +152,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Nzu-Lq-tSP">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Nzu-Lq-tSP">
                                 <rect key="frame" x="0.0" y="237" width="600" height="363"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Z9V-B4-K3R">
-                                    <size key="itemSize" width="100" height="100"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="2" id="Z9V-B4-K3R">
+                                    <size key="itemSize" width="120" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -152,11 +165,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RAd-yW-iph">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RAd-yW-iph">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -169,6 +182,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="thumbnailImageView" destination="RAd-yW-iph" id="KXG-uI-vi8"/>
+                                            <segue destination="4C2-xv-GMN" kind="show" identifier="postSegue" id="P0i-x4-inb"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -177,7 +191,7 @@
                                     <outlet property="delegate" destination="gsx-iF-hhc" id="kdT-qt-hxz"/>
                                 </connections>
                             </collectionView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="da0-40-RpM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="da0-40-RpM">
                                 <rect key="frame" x="16" y="72" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="7Yh-ct-cto"/>
@@ -281,7 +295,7 @@
                             <constraint firstItem="NG3-ut-MyE" firstAttribute="leading" secondItem="da0-40-RpM" secondAttribute="trailing" constant="18" id="3dg-8U-9Pj"/>
                             <constraint firstItem="19K-pQ-6nL" firstAttribute="leading" secondItem="AEm-La-u2d" secondAttribute="trailing" constant="8" id="3hx-VZ-wcF"/>
                             <constraint firstItem="bvz-70-diu" firstAttribute="top" secondItem="NG3-ut-MyE" secondAttribute="bottom" constant="8" id="6oN-uO-MyA"/>
-                            <constraint firstItem="80u-EP-LtJ" firstAttribute="top" secondItem="Nzu-Lq-tSP" secondAttribute="bottom" constant="-49" id="9OA-94-i90"/>
+                            <constraint firstItem="80u-EP-LtJ" firstAttribute="top" secondItem="Nzu-Lq-tSP" secondAttribute="bottom" id="9OA-94-i90"/>
                             <constraint firstItem="bvz-70-diu" firstAttribute="top" secondItem="NG3-ut-MyE" secondAttribute="bottom" constant="8" id="EEf-mg-cW8"/>
                             <constraint firstItem="da0-40-RpM" firstAttribute="leading" secondItem="xjg-Re-vDj" secondAttribute="leadingMargin" id="Fr8-pJ-eDs"/>
                             <constraint firstItem="hI8-7J-Mj3" firstAttribute="bottom" secondItem="da0-40-RpM" secondAttribute="bottom" id="FwX-KC-x43"/>
@@ -424,32 +438,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWI-GY-4zf">
+                                <rect key="frame" x="0.0" y="126" width="600" height="349"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" id="uh5-Uy-4qg">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uh5-Uy-4qg" id="62g-Pw-kcd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="p5F-XE-mek" id="6D2-yo-zux"/>
+                                    <outlet property="delegate" destination="p5F-XE-mek" id="d2a-Cc-8Y2"/>
+                                </connections>
+                            </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Jq5-ff-idC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zWI-GY-4zf">
-                                    <rect key="frame" x="0.0" y="130" width="600" height="349"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <prototypes>
-                                        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KaU-mf-reK">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KaU-mf-reK" id="CPB-VF-pxm">
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </tableViewCellContentView>
-                                        </tableViewCell>
-                                    </prototypes>
-                                    <connections>
-                                        <outlet property="dataSource" destination="p5F-XE-mek" id="6D2-yo-zux"/>
-                                        <outlet property="delegate" destination="p5F-XE-mek" id="d2a-Cc-8Y2"/>
-                                    </connections>
-                                </tableView>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="b8u-HI-VqO">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="matchCell" id="n7R-Lq-5kz">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b8u-HI-VqO" id="Wdb-JF-G7Z">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n7R-Lq-5kz" id="NyX-i9-kh6">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -463,12 +476,31 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="commentViewTable" destination="Jq5-ff-idC" id="iIH-fw-ihP"/>
+                        <outlet property="commentTextField" destination="gUb-1x-pVt" id="Xog-iY-Ric"/>
+                        <outlet property="commentViewTable" destination="zWI-GY-4zf" id="HSZ-eX-ZMc"/>
                         <outlet property="saveButton" destination="VuH-IH-A20" id="qNC-Fi-hoj"/>
-                        <outlet property="userMentionedInComment" destination="zWI-GY-4zf" id="zYP-3C-JOe"/>
+                        <outlet property="sendButton" destination="SmJ-0a-hPl" id="dTL-f2-zez"/>
+                        <outlet property="toolBar" destination="h3d-kr-ECz" id="0xM-op-lCg"/>
+                        <outlet property="userTaggingTableView" destination="Jq5-ff-idC" id="u26-DF-7Nh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2R-kF-1Jd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="h3d-kr-ECz">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <barButtonItem style="plain" id="Dyo-B8-asj">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="gUb-1x-pVt">
+                                <rect key="frame" x="16" y="7" width="512" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="5CZ-wg-Xbk"/>
+                        <barButtonItem title="Send" id="SmJ-0a-hPl"/>
+                    </items>
+                </toolbar>
                 <exit id="NdI-TX-Bgs" userLabel="Exit" sceneMemberID="exit"/>
                 <barButtonItem systemItem="save" id="VuH-IH-A20">
                     <connections>
@@ -631,8 +663,13 @@
             <point key="canvasLocation" x="1467" y="939"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="default" width="430" height="430"/>
+    </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="a6N-WQ-RBe"/>
+        <segue reference="vIT-j6-3HU"/>
         <segue reference="d6y-rz-tKK"/>
-        <segue reference="AAO-2h-Po8"/>
+        <segue reference="lie-gb-ABH"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -266,8 +266,8 @@ shouldBeginLogInWithUsername:(NSString *)username
 
 
     
-    if (indexPath.row == 0)
-    {
+//    if (indexPath.row == 0)
+//    {
         JVAPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
         {
@@ -285,7 +285,7 @@ shouldBeginLogInWithUsername:(NSString *)username
         
 
     }
-    else
+//    else
 //    {
 //        JVAPhotoCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
 //        detailCell.c
@@ -294,7 +294,7 @@ shouldBeginLogInWithUsername:(NSString *)username
 //    
     
 
-}
+
 
 - (IBAction)unwindFromCommentVC:(UIStoryboardSegue *)sender
 {

@@ -12,7 +12,7 @@
 
 @interface JVAUserListViewController : UIViewController
 
-@property Phojer *currentPhojer;
+@property Phojer *passedPhojer;
 @property BOOL showFollowing;
 
 @end

@@ -13,6 +13,6 @@
 
 @interface JVAProfileViewController : UIViewController
 
-@property Phojer *viewedPhojer;
+@property Phojer *passedPhojer;
 
 @end
