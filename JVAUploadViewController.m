@@ -8,11 +8,15 @@
 
 #import "JVAUploadViewController.h"
 #import <Parse/Parse.h>
+#import "Phojer.h"
+#import "Post.h"
+#import "Photo.h"
 @interface JVAUploadViewController ()<UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property BOOL appeared;
+@property Phojer *currentPhojer;
 @end
 
 @implementation JVAUploadViewController
@@ -31,6 +35,7 @@
         
     }
 
+    self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -52,11 +57,16 @@
     
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            // The image has now been uploaded to Parse. Associate it with a new object
-            PFObject* newPhotoObject = [PFObject objectWithClassName:@"Photo"];
-            [newPhotoObject setObject:imageFile forKey:@"image"];
             
-            [newPhotoObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            // The image has now been uploaded to Parse. Associate it with a new object
+            Photo *newPhotoObject = [Photo object];
+            newPhotoObject.image = imageFile;
+            
+            Post *newPost = [Post object];
+            newPost.poster = self.currentPhojer;
+            newPost.photo = newPhotoObject;
+            
+            [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
                     NSLog(@"Saved");
                 }

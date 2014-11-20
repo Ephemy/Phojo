@@ -15,6 +15,7 @@
 @dynamic location;
 @dynamic taggedPhojers;
 
+
 + (void)load
 {
     [self registerSubclass];
