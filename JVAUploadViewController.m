@@ -64,6 +64,7 @@
             newPhotoObject.image = imageFile;
             
             Post *newPost = [Post object];
+            newPost.caption = self.captionTextView.text;
             newPost.poster = self.currentPhojer;
             newPost.photo = newPhotoObject;
             
@@ -71,8 +72,8 @@
                 if (!error) {
                     NSLog(@"Saved");
                 }
-                else{
-                    // Error
+                else
+                {
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
             }];
