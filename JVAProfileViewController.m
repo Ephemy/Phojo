@@ -14,7 +14,7 @@
 #import "Post.h"
 #import "Photo.h"
 
-@interface JVAProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface JVAProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -198,6 +198,9 @@
 {
     // pass post and segue to feed view
 }
+
+#pragma mark - gesture recognizer methods
+
 
 #pragma mark - helper methods
 
