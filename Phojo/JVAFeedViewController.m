@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [PFUser logOut];
+    //    [PFUser logOut];
     self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
     
     
@@ -48,7 +48,7 @@
         [self presentViewController:login animated:YES completion:nil];
     }
     else{
-//        [self alertViewStuff];
+        //        [self alertViewStuff];
     }
     
     [self queryAndLoad];
@@ -72,7 +72,7 @@
 
 - (void)queryAndLoad
 {
-   
+    
     //1 - get the array of followers
     PFRelation *followingRelation = [self.currentPhojer relationForKey:@"following"];
     PFQuery *followersQuery = [followingRelation query];
@@ -91,7 +91,7 @@
             PFQuery *postsQuery = [Post query];
             [postsQuery whereKey:@"poster" containedIn:self.followingArray];
             [postsQuery includeKey:@"photo"];
-
+            
             
             
             [postsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -103,7 +103,11 @@
                 else
                 {
                     self.postArray = objects;
-                    [self.collectionView reloadData];
+                    
+                    //for every post in feed, get comments.
+                    for(Post *post in self.postArray)
+                        [self getCommentsForPost:post];
+                    
                 }
                 
             }];
@@ -117,25 +121,26 @@
             
         }
     }];
-
+    
 }
 
-//- (void) getCommentsForPost: (Post *)post
-//{
-//
-//    PFQuery *commentsQuery = [Comment query];
-//    [commentsQuery whereKey:@"post" equalTo:post];
-//    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-//    {
-//        if (error)
-//        {
-//            NSLog(@"%@",error.localizedDescription);
-//        }else{
-//            self.currentCommentsArray = objects;
-//            [self.collectionView reloadData];
-//        }
-//    }];
-//}
+- (void) getCommentsForPost: (Post *)post
+{
+    
+    
+    PFQuery *commentsQuery = [Comment query];
+    [commentsQuery whereKey:@"post" equalTo:post];
+    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"%@",error.localizedDescription);
+         }else{
+             self.currentCommentsArray = objects;
+             [self.collectionView reloadData];
+         }
+     }];
+}
 //
 
 
@@ -188,7 +193,7 @@ shouldBeginLogInWithUsername:(NSString *)username
     
     
     
-
+    
 }
 
 
@@ -253,7 +258,7 @@ shouldBeginLogInWithUsername:(NSString *)username
 
 
 
-
+#pragma mark: Collection View Methods
 
 
 
@@ -264,16 +269,15 @@ shouldBeginLogInWithUsername:(NSString *)username
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-
+    
     return self.postArray.count;
-
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
     Post *post = self.postArray[indexPath.row];
-//    [self getCommentsForPost:post];
     Photo *photo = post.photo;
     PFFile *imageFile = photo.image;
     
@@ -281,33 +285,36 @@ shouldBeginLogInWithUsername:(NSString *)username
     {
         JVAPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
-        {
-            if (error)
-            {
-                NSLog(@"Error! %@",error.localizedDescription);
-            }
-            else
-            {
-                cell.photoImageView.image = [UIImage imageWithData:data];
-            }
-        }];
-            return cell;
+         {
+             if (error)
+             {
+                 NSLog(@"Error! %@",error.localizedDescription);
+             }
+             else
+             {
+                 cell.photoImageView.image = [UIImage imageWithData:data];
+             }
+         }];
+        return cell;
         
         
-
+        
     }
     else
     {
+        
+        
+        
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
-//        detailCell.commentWebView loadHTMLString:<#(NSString *)#> baseURL:<#(NSURL *)#>
-//        for (Comment *comment in self.currentCommentsArray) {
-//            NSLog(@"%@",comment.commentText);
-//        }
-
+        //        detailCell.commentWebView loadHTMLString:<#(NSString *)#> baseURL:<#(NSURL *)#>
+                for (Comment *comment in self.currentCommentsArray) {
+                    NSLog(@"%@",comment.commentText);
+                }
+        
         return detailCell;
     }
     
-
+    
 }
 
 
