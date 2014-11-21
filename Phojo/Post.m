@@ -15,7 +15,7 @@
 @dynamic location;
 @dynamic photo;
 @dynamic poster;
-
+@dynamic tags;
 + (void)load
 {
     [self registerSubclass];
