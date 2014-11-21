@@ -9,6 +9,7 @@
 #import "JVAFeedViewController.h"
 #import "JVAPhotoCollectionViewCell.h"
 #import "JVAPostDetailCollectionViewCell.h"
+#import "JVAProfileViewController.h"
 #import "JVACommentViewController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) NSArray *followingArray;
 @property (strong, nonatomic) NSArray *currentCommentsArray;
 @property NSString *stringToPass;
+@property Phojer *passedPhojer;
 
 @end
 
@@ -94,6 +96,7 @@
             PFQuery *postsQuery = [Post query];
             [postsQuery whereKey:@"poster" containedIn:self.followingArray];
             [postsQuery includeKey:@"photo"];
+            [postsQuery includeKey:@"poster"];
             
             
             
@@ -214,7 +217,17 @@
         NSURL *theURL = request.URL;
         self.stringToPass = [theURL lastPathComponent];
         
-//        [self performSegueWithIdentifier:@"poke" sender:self];
+        PFQuery *query = [Phojer query];
+        [query whereKey:@"username" equalTo:self.stringToPass];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            self.passedPhojer = objects.firstObject;
+           
+            [self performSegueWithIdentifier:@"userProfilePush" sender:self];
+
+            
+        }];
+        
         return NO;
     }
     return YES;
@@ -401,14 +414,19 @@ shouldBeginLogInWithUsername:(NSString *)username
 
             [finalString appendString:resultString];
             [finalString appendString: @"</br>"];
+            [finalString appendFormat:@"–––––"];
+            [finalString appendString: @"</br>"];
+
+            
 //            NSLog(@"%@", comment.post.caption);
 
         }
        
         [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
 //        NSLog(@"%@", detailCell.postValue.caption);
-//        detailCell.postValue = firstComment.post;
-        
+        detailCell.postValue = firstComment.post;
+//        Phojer *poster = firstComment.post.poster;
+//        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
         return detailCell;
     }
     
@@ -417,12 +435,33 @@ shouldBeginLogInWithUsername:(NSString *)username
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton *)button
 {
+    if([segue.identifier isEqualToString:@"commentPush"]){
     
-//    JVAPostDetailCollectionViewCell *cell = [[button superview] superview] ;
-//    Post *post = cell.postValue;
-//    JVACommentViewController *JVAcommentVC = segue.destinationViewController;
-//    JVAcommentVC.currentPost = post;
+    JVAPostDetailCollectionViewCell *cell = (JVAPostDetailCollectionViewCell *)[[button superview] superview] ;
+    Post *post = cell.postValue;
+    JVACommentViewController *JVAcommentVC = segue.destinationViewController;
+    JVAcommentVC.currentPost = post;
+        
+    }
+    
+    
+    if([segue.identifier isEqualToString:@"userProfilePush"])
+    {
+        UINavigationController *navVC = segue.destinationViewController;
+
+        JVAProfileViewController *JVAprofileVC = navVC.childViewControllers.firstObject;
+        JVAprofileVC.passedPhojer = self.passedPhojer;
+
+    }
 }
+
+//-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+//{
+//    if([segue.identifier isEqualToString:@"userProfilePush"])
+//    {
+//        
+//    }
+//}
 - (IBAction)unwindFromCommentVC:(UIStoryboardSegue *)sender
 {
     

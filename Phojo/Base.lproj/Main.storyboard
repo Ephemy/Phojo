@@ -63,7 +63,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="p5F-XE-mek" kind="show" id="lie-gb-ABH"/>
+                                                        <segue destination="p5F-XE-mek" kind="show" identifier="commentPush" id="lie-gb-ABH"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-Bo-CHf">
@@ -100,7 +100,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="Wj9-ee-sQj" kind="show" id="AAO-2h-Po8"/>
+                                                        <segue destination="Wj9-ee-sQj" kind="show" identifier="userProfilePush" id="AAO-2h-Po8"/>
                                                     </connections>
                                                 </button>
                                                 <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4Y-yl-qO3">

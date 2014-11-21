@@ -71,8 +71,8 @@
     
     //    Post *post = [Post object];
     PFQuery *photoQuery = [Post query];
-    [photoQuery whereKey:@"objectId" equalTo:@"URxVDbAAbW"];
-//        [photoQuery whereKey:@"objectId" equalTo:self.currentPost];
+//    [photoQuery whereKey:@"objectId" equalTo:@"URxVDbAAbW"];
+        [photoQuery whereKey:@"objectId" equalTo:self.currentPost.objectId];
 
     [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         Post *post = objects.firstObject;
