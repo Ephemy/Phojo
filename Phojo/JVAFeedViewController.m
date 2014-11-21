@@ -230,7 +230,8 @@
     //if there are no @mentions then just return original string
     if(matches.count == 0)
     {
-        return string;
+        NSMutableString *noMentionsString = [self createHashTagsFromTextField:[string mutableCopy]];
+        return noMentionsString;
     }
     
     //otherwise iterate through and wrap the code into html format
@@ -482,13 +483,15 @@ shouldBeginLogInWithUsername:(NSString *)username
         
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
         NSMutableString *finalString = [NSMutableString string];
+        [finalString appendFormat:@"–––––"];
+        [finalString appendString: @"</br>"];
         
         
         if(self.passedPost){
             for (Comment *comment in self.currentCommentsArray)
             {
                 
-                NSLog(@"%@",comment.commentText);
+//                NSLog(@"%@",comment.commentText);
                 NSString *resultString = [self createTagsFromTextField:comment.commentText];
                 
                 
@@ -506,7 +509,7 @@ shouldBeginLogInWithUsername:(NSString *)username
             for (Comment *comment in self.totalCommentsArray[indexPath.section])
             {
                 
-                NSLog(@"%@",comment.commentText);
+//                NSLog(@"%@",comment.commentText);
                 NSString *resultString = [self createTagsFromTextField:comment.commentText];
                 
                 
@@ -525,7 +528,15 @@ shouldBeginLogInWithUsername:(NSString *)username
         
 
         Post *captionPost = self.postArray[indexPath.section];
-        [detailCell.captionWebView loadHTMLString:captionPost.caption baseURL:nil];
+        NSString *captionString = captionPost.caption;
+        
+        NSLog(@"%@",[self createTagsFromTextField:captionString]);
+        
+        [detailCell.captionWebView loadHTMLString:[self createTagsFromTextField:captionString] baseURL:nil];
+        
+        
+        
+        
         //later implementation of user label
         //        Phojer *poster = firstComment.post.poster;
         //        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
