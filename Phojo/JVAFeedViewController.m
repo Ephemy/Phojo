@@ -14,6 +14,7 @@
 #import "Post.h"
 #import "Photo.h"
 #import "Phojer.h"
+#import "Comment.h"
 @import Social;
 
 @interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UIWebViewDelegate>
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *postArray;
 @property (strong, nonatomic) NSArray *followingArray;
+@property (strong, nonatomic) NSArray *currentCommentsArray;
 @end
 
 @implementation JVAFeedViewController
@@ -87,6 +89,7 @@
             PFQuery *postsQuery = [Post query];
             [postsQuery whereKey:@"poster" containedIn:self.followingArray];
             [postsQuery includeKey:@"photo"];
+
             
             
             [postsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -115,7 +118,22 @@
 
 }
 
+- (void) getCommentsForPost: (Post *)post
+{
 
+    PFQuery *commentsQuery = [Comment query];
+    [commentsQuery whereKey:@"post" equalTo:post];
+    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+        if (error)
+        {
+            NSLog(@"%@",error.localizedDescription);
+        }else{
+            self.currentCommentsArray = objects;
+            [self.collectionView reloadData];
+        }
+    }];
+}
 
 
 
@@ -251,21 +269,11 @@ shouldBeginLogInWithUsername:(NSString *)username
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     Post *post = self.postArray[indexPath.row];
-
+    [self getCommentsForPost:post];
     Photo *photo = post.photo;
     PFFile *imageFile = photo.image;
-//    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-//        if (error)
-//        {
-//            //TODO: error check
-//        }
-//        else
-//        {
-//            cell.thumbnailImageView.image = [UIImage imageWithData:data];
-//        }
-
-
     
     if (indexPath.row == 0)
     {
@@ -289,7 +297,11 @@ shouldBeginLogInWithUsername:(NSString *)username
     else
     {
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
-//        [detailCell.captionWebView loadHTMLString:@"Test test test"];
+//        detailCell.commentWebView loadHTMLString:<#(NSString *)#> baseURL:<#(NSURL *)#>
+        for (Comment *comment in self.currentCommentsArray) {
+            NSLog(@"%@",comment.commentText);
+        }
+
         return detailCell;
     }
     

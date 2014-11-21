@@ -488,23 +488,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWI-GY-4zf">
-                                <rect key="frame" x="0.0" y="126" width="600" height="349"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" id="uh5-Uy-4qg">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uh5-Uy-4qg" id="62g-Pw-kcd">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="p5F-XE-mek" id="6D2-yo-zux"/>
-                                    <outlet property="delegate" destination="p5F-XE-mek" id="d2a-Cc-8Y2"/>
-                                </connections>
-                            </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Jq5-ff-idC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -536,18 +519,55 @@
                                     <outlet property="delegate" destination="p5F-XE-mek" id="eNN-kK-TRV"/>
                                 </connections>
                             </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWI-GY-4zf">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" id="uh5-Uy-4qg">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uh5-Uy-4qg" id="62g-Pw-kcd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="p5F-XE-mek" id="6D2-yo-zux"/>
+                                    <outlet property="delegate" destination="p5F-XE-mek" id="d2a-Cc-8Y2"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vKE-GG-QXz" firstAttribute="top" secondItem="Jq5-ff-idC" secondAttribute="bottom" id="1MO-Ay-I1d"/>
                             <constraint firstItem="zWI-GY-4zf" firstAttribute="top" secondItem="hWU-dD-Y19" secondAttribute="bottom" constant="62" id="4Oc-xh-EXh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jq5-ff-idC" secondAttribute="trailing" constant="-16" id="6gN-ue-ZS0"/>
                             <constraint firstItem="Jq5-ff-idC" firstAttribute="top" secondItem="q6J-na-dk8" secondAttribute="topMargin" id="Cw6-Mm-YBx"/>
                             <constraint firstItem="zWI-GY-4zf" firstAttribute="leading" secondItem="q6J-na-dk8" secondAttribute="leadingMargin" constant="-16" id="DU2-dQ-ycO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jq5-ff-idC" secondAttribute="trailing" constant="-16" id="I4C-dQ-vO4"/>
+                            <constraint firstItem="Jq5-ff-idC" firstAttribute="top" secondItem="q6J-na-dk8" secondAttribute="topMargin" id="Og4-yJ-LEE"/>
+                            <constraint firstItem="zWI-GY-4zf" firstAttribute="leading" secondItem="q6J-na-dk8" secondAttribute="leadingMargin" constant="-16" id="SSx-FL-ymh"/>
                             <constraint firstItem="vKE-GG-QXz" firstAttribute="top" secondItem="Jq5-ff-idC" secondAttribute="bottom" id="Snt-Sf-tjl"/>
+                            <constraint firstItem="vKE-GG-QXz" firstAttribute="top" secondItem="zWI-GY-4zf" secondAttribute="bottom" id="aDc-qa-nm3"/>
                             <constraint firstItem="Jq5-ff-idC" firstAttribute="leading" secondItem="q6J-na-dk8" secondAttribute="leadingMargin" constant="-16" id="qQ6-ne-cfB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zWI-GY-4zf" secondAttribute="trailing" constant="-16" id="qTy-vR-G3P"/>
+                            <constraint firstItem="zWI-GY-4zf" firstAttribute="top" secondItem="hWU-dD-Y19" secondAttribute="bottom" id="wRZ-XW-NKi"/>
+                            <constraint firstItem="Jq5-ff-idC" firstAttribute="leading" secondItem="q6J-na-dk8" secondAttribute="leadingMargin" constant="-16" id="yD4-zL-a2v"/>
                             <constraint firstItem="vKE-GG-QXz" firstAttribute="top" secondItem="zWI-GY-4zf" secondAttribute="bottom" constant="125" id="zfk-Qi-05r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zWI-GY-4zf" secondAttribute="trailing" constant="-16" id="zko-6n-SGt"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Cw6-Mm-YBx"/>
+                                <exclude reference="I4C-dQ-vO4"/>
+                                <exclude reference="qQ6-ne-cfB"/>
+                                <exclude reference="4Oc-xh-EXh"/>
+                                <exclude reference="DU2-dQ-ycO"/>
+                                <exclude reference="qTy-vR-G3P"/>
+                                <exclude reference="Snt-Sf-tjl"/>
+                                <exclude reference="zfk-Qi-05r"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="commentTextField" destination="gUb-1x-pVt" id="Xog-iY-Ric"/>
