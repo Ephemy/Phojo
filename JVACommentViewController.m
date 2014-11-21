@@ -36,6 +36,7 @@
     [self commentTaggingDetected];
     [self refreshDisplay];
     self.commentTextField.delegate = self;
+
     
     
     //    Phojer *phojer = [[PFUser currentUser] objectForKey:@"Phojer"];
@@ -48,18 +49,19 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.userTaggingTableView.contentInset = self.commentViewTable.contentInset;
-    self.userTaggingTableView.scrollIndicatorInsets = self.commentViewTable.scrollIndicatorInsets;
+    CGFloat topLayoutGuide = self.topLayoutGuide.length + self.navigationController.navigationBar.frame.size.height;
+    self.userTaggingTableView.contentInset = UIEdgeInsetsMake(topLayoutGuide, 0, 0, 0);
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.toolBar.frame = CGRectMake(0, self.view.frame.size.height - 100, [[UIScreen mainScreen] bounds].size.width, self.toolBar.frame.size.height);
+
     
     self.userTaggingTableView.contentInset = self.commentViewTable.contentInset;
     self.userTaggingTableView.scrollIndicatorInsets = self.commentViewTable.scrollIndicatorInsets;
     
+        self.toolBar.frame = CGRectMake(0, self.view.frame.size.height - 100, [[UIScreen mainScreen] bounds].size.width, self.toolBar.frame.size.height);
     [self.view addSubview:self.toolBar];
     
 }
