@@ -560,7 +560,6 @@
                         <outlet property="commentTextField" destination="gUb-1x-pVt" id="Xog-iY-Ric"/>
                         <outlet property="commentViewTable" destination="zWI-GY-4zf" id="HSZ-eX-ZMc"/>
                         <outlet property="saveButton" destination="VuH-IH-A20" id="qNC-Fi-hoj"/>
-                        <outlet property="sendButton" destination="SmJ-0a-hPl" id="dTL-f2-zez"/>
                         <outlet property="toolBar" destination="h3d-kr-ECz" id="0xM-op-lCg"/>
                         <outlet property="userTaggingTableView" destination="Jq5-ff-idC" id="u26-DF-7Nh"/>
                     </connections>
@@ -572,14 +571,18 @@
                     <items>
                         <barButtonItem style="plain" id="Dyo-B8-asj">
                             <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="gUb-1x-pVt">
-                                <rect key="frame" x="16" y="7" width="512" height="30"/>
+                                <rect key="frame" x="16" y="7" width="232" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="5CZ-wg-Xbk"/>
-                        <barButtonItem title="Send" id="SmJ-0a-hPl"/>
+                        <barButtonItem title="Send" id="SmJ-0a-hPl">
+                            <connections>
+                                <action selector="sendComment:" destination="p5F-XE-mek" id="cCn-4d-5dQ"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
                 <exit id="NdI-TX-Bgs" userLabel="Exit" sceneMemberID="exit"/>
@@ -748,9 +751,9 @@
         <image name="default" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OLX-J7-kqY"/>
         <segue reference="AAO-2h-Po8"/>
         <segue reference="P0i-x4-inb"/>
         <segue reference="lie-gb-ABH"/>
+        <segue reference="OLX-J7-kqY"/>
     </inferredMetricsTieBreakers>
 </document>

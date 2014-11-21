@@ -26,6 +26,8 @@
 @property int originalStringIndex;
 @property NSString *stringToEdit;
 
+
+
 @end
 
 @implementation JVACommentViewController
@@ -35,7 +37,7 @@
     [self commentTaggingDetected];
     [self refreshDisplay];
     
-
+    
     //    Phojer *phojer = [[PFUser currentUser] objectForKey:@"Phojer"];
     PFQuery *phojerQuery = [Phojer query];
     [phojerQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -48,14 +50,19 @@
 //    [super viewDidAppear:animated];
 //    [self.view addSubview:self.toolBar];
 //    self.toolBar.frame = CGRectMake(0, 84, self.view.frame.size.width, self.toolBar.frame.size.height);
-//    
+//
 //}
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.toolBar.frame = CGRectMake(0, self.view.frame.size.height - 100, [[UIScreen mainScreen] bounds].size.width, self.toolBar.frame.size.height);
+    
+    self.userTaggingTableView.contentInset = self.commentViewTable.contentInset;
+    self.userTaggingTableView.scrollIndicatorInsets = self.commentViewTable.scrollIndicatorInsets;
+    
     [self.view addSubview:self.toolBar];
-    self.toolBar.frame = CGRectMake(0, 84, self.view.frame.size.width, self.toolBar.frame.size.height);
+    
 }
 
 - (void)refreshDisplay
@@ -64,10 +71,12 @@
     
     //    Post *post = [Post object];
     PFQuery *photoQuery = [Post query];
-    [photoQuery whereKey:@"objectId" equalTo:@"vlfTvWMCOe"];
+    [photoQuery whereKey:@"objectId" equalTo:@"URxVDbAAbW"];
+//        [photoQuery whereKey:@"objectId" equalTo:self.currentPost];
+
     [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         Post *post = objects.firstObject;
-//        self.currentPost = post;
+        //        self.currentPost = post;
         
         PFQuery *query = [Comment query];
         [query whereKey:@"post" equalTo:post];
@@ -105,8 +114,12 @@
     if([tableView isEqual:self.userTaggingTableView])
     {
         Phojer *phojer = self.matchingUsersArray[indexPath.row];
-        self.commentTextField.text = [self.stringToEdit stringByAppendingString:phojer.name];
+        self.commentTextField.text = [self.stringToEdit stringByAppendingString:phojer.username];
+        
         self.isUserTaggingModeEnabled = NO;
+        [self.commentViewTable setHidden:NO];
+        
+        [self.userTaggingTableView setHidden:YES];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,14 +147,13 @@
         cell.textLabel.text = phojer.name;
         
         
+        
     }
     
     return cell;
 }
-- (IBAction)onButtonPressedSendComment:(UIButton *)sender
+- (IBAction)sendComment:(id)sender
 {
-    
-    
     Comment *comment = [Comment object];
     comment.commentText = self.commentTextField.text;
     comment.post = self.currentPost;
@@ -152,8 +164,6 @@
     }];
     
 }
-
-
 
 
 
@@ -183,10 +193,14 @@
         if([trimmedString isEqualToString: @"@"]) //enter mode
         {
             //enter tableview toggle mode / BOOL value as property
-            self.stringToEdit = string;
+            
             
             self.isUserTaggingModeEnabled = YES;
             self.originalStringIndex = (int)[string length]; //probably have to be a property
+            //            NSString *subString = [string substringToIndex: self.originalStringIndex - 1];
+            self.stringToEdit = string;
+            
+            
         }
     }
     
@@ -194,19 +208,24 @@
     else{
         
         
-        [self.commentTextField setHidden:YES];
+        [self.commentViewTable setHidden:YES];
         
         [self.userTaggingTableView setHidden:NO];
         
-        //corner case of multiple @s in a row
+        [self.view bringSubviewToFront:self.toolBar];
         
-        
-        
-        self.stringToEdit = string;
-        
+        //corner case of multiple @s in a rowafje
         //save previous data before continuing
-//        NSString *subString = [string substringToIndex: self.originalStringIndex - 1];
-
+        if(string.length - 1 < self.originalStringIndex)
+        {
+            self.isUserTaggingModeEnabled = NO;
+            [self.commentViewTable setHidden:NO];
+            
+            [self.userTaggingTableView setHidden:YES];
+            return;
+            
+        }
+        
         //maybe I'll also save the index right here.
         
         
@@ -223,7 +242,7 @@
         //                for(Phojer *phojer in self.phojer.followed)
         for(Phojer *phojer in self.phojerArray)
         {
-            if([phojer.name containsString: continuedTypingString])
+            if([phojer.username containsString: continuedTypingString])
                 [self.matchingUsersArray addObject: phojer];
             //            [self refreshDisplay];
             [self.userTaggingTableView reloadData];

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 @interface JVAPostDetailCollectionViewCell : UICollectionViewCell
+@property Post *postValue;
 @property (strong, nonatomic) IBOutlet UIButton *userButton;
 @property (strong, nonatomic) IBOutlet UIButton *flagButton;
 @property (strong, nonatomic) IBOutlet UIButton *commentButton;
