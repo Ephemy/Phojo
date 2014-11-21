@@ -41,9 +41,10 @@
 
     self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
     
-    
-    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+
 }
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -431,10 +432,12 @@ shouldBeginLogInWithUsername:(NSString *)username
             NSLog(@"%@",comment.commentText);
             NSString *resultString = [self createTagsFromTextField:comment.commentText];
 
+            [finalString appendString:@"<font face=\"helvetica\">"];
             [finalString appendString:resultString];
             [finalString appendString: @"</br>"];
             [finalString appendFormat:@"–––––"];
             [finalString appendString: @"</br>"];
+            [finalString appendString:@"</font>"];
 
             
 //            NSLog(@"%@", comment.post.caption);

@@ -52,14 +52,14 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eY-Yq-qW6">
                                                     <rect key="frame" x="200" y="0.0" width="100" height="15"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.1158024892" green="0.55445522069999997" blue="0.54342293740000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="SPG-T5-878"/>
                                                         <constraint firstAttribute="width" constant="100" id="eIE-Gj-ZGk"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <state key="normal" title="Comment">
-                                                        <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <state key="normal" title="COMMENT">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -68,14 +68,14 @@
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-Bo-CHf">
                                                     <rect key="frame" x="0.0" y="0.0" width="56" height="15"/>
-                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.42878434062004089" green="0.80185294151306152" blue="0.78471052646636963" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="56" id="ZH3-g8-upw"/>
                                                         <constraint firstAttribute="height" constant="15" id="yFt-1I-Reg"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <state key="normal" title="Flag">
-                                                        <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <state key="normal" title="FLAG">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -224,7 +224,7 @@
                                     <constraint firstAttribute="width" constant="280" id="gNb-ea-EQo"/>
                                     <constraint firstAttribute="height" constant="21" id="mWJ-WP-XmM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -256,7 +256,7 @@
                                     <constraint firstAttribute="width" constant="280" id="vOC-LD-ZWP"/>
                                     <constraint firstAttribute="height" constant="33" id="xbJ-0T-4fc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
@@ -272,7 +272,8 @@
                                     <constraint firstAttribute="width" constant="63" id="5FT-yR-Tmn"/>
                                     <constraint firstAttribute="height" constant="41" id="Bva-0A-1nF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="24"/>
+                                <color key="tintColor" red="0.1158024892" green="0.55445522069999997" blue="0.54342293740000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="0">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -282,7 +283,8 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcF-63-V6D">
                                 <rect key="frame" x="233" y="84" width="63" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="24"/>
+                                <color key="tintColor" red="0.1158024892" green="0.55445522069999997" blue="0.54342293740000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="0">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -292,7 +294,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hI8-7J-Mj3">
                                 <rect key="frame" x="16" y="179" width="128" height="21"/>
-                                <color key="backgroundColor" red="0.26243638990000001" green="0.81107264759999997" blue="0.8598896265" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.42878434059999998" green="0.80185294149999997" blue="0.78471052649999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="EdU-SG-SZv"/>
                                     <constraint firstAttribute="width" constant="128" id="MdL-eK-SlY"/>
@@ -398,13 +400,15 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CaL-q5-yrj">
                                 <rect key="frame" x="260" y="482" width="81" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.42878434059999998" green="0.80185294149999997" blue="0.78471052649999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fSO-mb-UdC"/>
                                     <constraint firstAttribute="width" constant="81" id="kgs-qf-FQG"/>
                                 </constraints>
-                                <state key="normal" title="Upload">
-                                    <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="UPLOAD">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -424,7 +428,8 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="pzr-Vf-JHf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -687,6 +692,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="gOq-21-cIr">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0qA-Cj-RFK"/>
                     </connections>
@@ -738,8 +746,8 @@
         <image name="default" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AAO-2h-Po8"/>
         <segue reference="P0i-x4-inb"/>
+        <segue reference="D9l-pO-1jH"/>
         <segue reference="OLX-J7-kqY"/>
     </inferredMetricsTieBreakers>
 </document>
