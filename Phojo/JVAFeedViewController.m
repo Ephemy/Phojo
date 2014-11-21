@@ -36,11 +36,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//        [PFUser logOut];
+    //        [PFUser logOut];
     self.totalCommentsArray = [@[] mutableCopy];
     self.collectionView.backgroundColor = [UIColor clearColor];
-
-    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
+    
+    //    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
     
     
     
@@ -49,10 +49,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
-
-    self.totalCommentsArray = [@[] mutableCopy];
-
+    
+    
     
     if([PFUser currentUser] == nil){
         PFLogInViewController *login = [[PFLogInViewController alloc] init];
@@ -62,33 +60,36 @@
     }
     else{
         //        [self alertViewStuff];
+        self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
+        
+        self.totalCommentsArray = [@[] mutableCopy];
     }
-
+    
     if (self.passedPost)
     {
         self.postArray = @[self.passedPost];
-
+        
         //for every post in feed, get comments.
         [self getCommentsForPost:self.passedPost onCompletionHandler:^(NSArray *array) {
-
+            
             self.currentCommentsArray = array;
-
+            
             [self.collectionView reloadData];
-
+            
         }];
     }
     else
     {
         [self queryAndLoad];
     }
-
+    
 }
 
 
 
 -(void)alertViewStuff
 {
-
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:@"Welcome to Phojo! Here's a Quick Introduction to get you started :)" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *welcomeButton = [UIAlertAction actionWithTitle:@"Great, Let's get started~~~~~" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
@@ -138,31 +139,31 @@
                     for(Post *post in self.postArray)
                         
                         [self getCommentsForPost:post onCompletionHandler:^(NSArray *array)
-                    {
-                        if(self.passedPost)
-                        {
-                            self.currentCommentsArray = array;
-                            [self.collectionView reloadData];
-                        }
-                        else
-                        {
-
-                            if(array == nil)
-                            {
-//                                [self.totalCommentsArray addObject:[NSNull null]];
-                            }
-                            
-                            [self.totalCommentsArray addObject:array];
-                            
-                        }
-                        [self.collectionView reloadData];
-
-                    }];
+                         {
+                             if(self.passedPost)
+                             {
+                                 self.currentCommentsArray = array;
+                                 [self.collectionView reloadData];
+                             }
+                             else
+                             {
+                                 
+                                 if(array == nil)
+                                 {
+                                     //                                [self.totalCommentsArray addObject:[NSNull null]];
+                                 }
+                                 
+                                 [self.totalCommentsArray addObject:array];
+                                 
+                             }
+                             [self.collectionView reloadData];
+                             
+                         }];
                 }
                 
-                    //- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
-                    
-                    
+                //- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
+                
+                
                 
                 
             }];
@@ -209,64 +210,76 @@
 
 
 - (NSString *)createTagsFromTextField:(NSString *)string
-//- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
 
 {
+    
+    //the string to rule them all - string initiation
     NSMutableString *theMasterString = [NSMutableString string];
     
+    //save the indices of the string while scanning to concatenate later
     int lastPoint = 0;
     int lastWordLength = 0;
     NSString *lastString = [NSString string];
     
-    //    NSString *string = @"hi my name is jon #hashtag ihopethiworks #yolo #swag #nomnom fewfeawfefefefeafew #screwu";
+    //creates a regex filter to search for substrings that begin with @
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"@(\\w+)" options:0 error:&error];
     NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(0, string.length)];
+    
+    //if there are no @mentions then just return original string
     if(matches.count == 0)
     {
         return string;
     }
+    
+    //otherwise iterate through and wrap the code into html format
     else
     {
-    for (NSTextCheckingResult *match in matches) {
-        NSRange wordRange = [match rangeAtIndex:1];
-        NSLog(@"%lu", (unsigned long)wordRange.location);
-        NSString* word = [string substringWithRange:wordRange];
-        NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/%@\">@%@</a> ",word, word];
-        NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
-        
-        lastString = stringURL;
-        //        NSLog(@"Found tag %@", subString);
-        NSLog(@"%@", subString);
-        
-        [theMasterString appendString:subString];
-        [theMasterString appendString:stringURL];
-        
-        lastPoint = (int)wordRange.location;
-        lastWordLength = (int)word.length + 1;
-        
+        for (NSTextCheckingResult *match in matches) {
+            NSRange wordRange = [match rangeAtIndex:1];
+            NSLog(@"%lu", (unsigned long)wordRange.location);
+            NSString* word = [string substringWithRange:wordRange];
+            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/%@\">@%@</a> ",word, word];
+            
+            //keep track of code that is not @mentions for merging later
+            NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
+            
+            lastString = stringURL;
+            NSLog(@"%@", subString);
+            
+            //finish appending strings
+            [theMasterString appendString:subString];
+            [theMasterString appendString:stringURL];
+            
+            //keeps track
+            lastPoint = (int)wordRange.location;
+            lastWordLength = (int)word.length + 1;
+            
+        }
+        NSLog(@"%@", theMasterString );
+        return theMasterString;
     }
-    NSLog(@"%@", theMasterString );
-    return theMasterString;
-    }
-//    [self.phojoWebView loadHTMLString:theMasterString baseURL:nil];
+    //    [self.phojoWebView loadHTMLString:theMasterString baseURL:nil];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    //on link clicked
     if(navigationType == UIWebViewNavigationTypeLinkClicked){
         
         NSURL *theURL = request.URL;
         self.stringToPass = [theURL lastPathComponent];
         
         PFQuery *query = [Phojer query];
+        
+        //match Phojer and segue into User Profile Page
         [query whereKey:@"username" equalTo:self.stringToPass];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             self.passedPhojer = objects.firstObject;
-           
+            
             [self performSegueWithIdentifier:@"userProfilePush" sender:self];
-
+            
             
         }];
         
@@ -274,18 +287,6 @@
     }
     return YES;
 }
-
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    SecondVCViewController *sVC = segue.destinationViewController;
-//    sVC.string = self.stringToPass;
-//}
-
-
-
-
-
-
 
 
 #pragma mark: login controller methods
@@ -297,48 +298,22 @@ shouldBeginLogInWithUsername:(NSString *)username
     return ([PFUser currentUser] == nil);
 }
 
-///--------------------------------------
-/// @name Responding to Actions
-///--------------------------------------
 
-/*!
- @abstract Sent to the delegate when a <PFUser> is logged in.
- 
- @param logInController The login view controller where login finished.
- @param user <PFUser> object that is a result of the login.
- */
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
     if(user )
         [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*!
- @abstract Sent to the delegate when the log in attempt fails.
- 
- @param logInController The login view controller where login failed.
- @param error `NSError` object representing the error that occured.
- */
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error
 {
     
 }
 
-/*!
- @abstract Sent to the delegate when the log in screen is cancelled.
- 
- @param logInController The login view controller where login was cancelled.
- */
 - (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController
 {
     
-    
-    
-    
 }
-
-
-
 
 #pragma mark: sign up controller methods
 
@@ -368,35 +343,14 @@ shouldBeginLogInWithUsername:(NSString *)username
     return informationComplete;
 }
 
-///--------------------------------------
-/// @name Responding to Actions
-///--------------------------------------
-
-/*!
- @abstract Sent to the delegate when a <PFUser> is signed up.
- 
- @param signUpController The signup view controller where signup finished.
- @param user <PFUser> object that is a result of the sign up.
- */
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
 {
     [self dismissViewControllerAnimated:YES completion:nil];}
 
-/*!
- @abstract Sent to the delegate when the sign up attempt fails.
- 
- @param signUpController The signup view controller where signup failed.
- @param error `NSError` object representing the error that occured.
- */
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error
 {
     
 }
-
-
-
-
-
 
 
 #pragma mark: Collection View Methods
@@ -415,6 +369,8 @@ shouldBeginLogInWithUsername:(NSString *)username
     
 }
 
+
+//trust me it works.
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -444,41 +400,30 @@ shouldBeginLogInWithUsername:(NSString *)username
     else
     {
         
-        
-        
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
         NSMutableString *finalString = [NSMutableString string];
         Comment *firstComment = [Comment object];
         
         
         if(self.passedPost){
-            firstComment = self.currentCommentsArray.firstObject;
-
-        for (Comment *comment in self.currentCommentsArray)
-        {
-            
-            NSLog(@"%@",comment.commentText);
-            NSString *resultString = [self createTagsFromTextField:comment.commentText];
-        
-
-            [finalString appendString:resultString];
-            [finalString appendString: @"</br>"];
-            [finalString appendFormat:@"–––––"];
-            [finalString appendString: @"</br>"];
-
-            
-//            NSLog(@"%@", comment.post.caption);
-
-        }
+            for (Comment *comment in self.currentCommentsArray)
+            {
+                
+                NSLog(@"%@",comment.commentText);
+                NSString *resultString = [self createTagsFromTextField:comment.commentText];
+                
+                
+                [finalString appendString:resultString];
+                [finalString appendString: @"</br>"];
+                [finalString appendFormat:@"–––––"];
+                [finalString appendString: @"</br>"];
+                
+            }
         }
         
         else
             
         {
-//            NSArray *testArray = self.totalCommentsArray.firstObject;
-//            firstComment = testArray.firstObject;
-
-            
             for (Comment *comment in self.totalCommentsArray[indexPath.section])
             {
                 
@@ -491,20 +436,17 @@ shouldBeginLogInWithUsername:(NSString *)username
                 [finalString appendFormat:@"–––––"];
                 [finalString appendString: @"</br>"];
                 
-                
-                //            NSLog(@"%@", comment.post.caption);
-                
             }
         }
         
         
-       
+        
         [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
-//        NSLog(@"%@", detailCell.postValue.caption);
         detailCell.postValue = self.postArray[indexPath.section];
         
-//        Phojer *poster = firstComment.post.poster;
-//        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
+        //later implementation of user label
+        //        Phojer *poster = firstComment.post.poster;
+        //        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
         return detailCell;
     }
     
@@ -514,13 +456,13 @@ shouldBeginLogInWithUsername:(NSString *)username
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton *)button
 {
     if([segue.identifier isEqualToString:@"commentPush"]){
-    
-    JVAPostDetailCollectionViewCell *cell = (JVAPostDetailCollectionViewCell *)[[button superview] superview] ;
-    Post *post = cell.postValue;
         
-    JVACommentViewController *JVAcommentVC = segue.destinationViewController;
+        JVAPostDetailCollectionViewCell *cell = (JVAPostDetailCollectionViewCell *)[[button superview] superview] ;
+        Post *post = cell.postValue;
         
-    JVAcommentVC.currentPost = post;
+        JVACommentViewController *JVAcommentVC = segue.destinationViewController;
+        
+        JVAcommentVC.currentPost = post;
         
     }
     
@@ -528,20 +470,13 @@ shouldBeginLogInWithUsername:(NSString *)username
     if([segue.identifier isEqualToString:@"userProfilePush"])
     {
         UINavigationController *navVC = segue.destinationViewController;
-
+        
         JVAProfileViewController *JVAprofileVC = navVC.childViewControllers.firstObject;
         JVAprofileVC.passedPhojer = self.passedPhojer;
-
+        
     }
 }
 
-//-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-//{
-//    if([segue.identifier isEqualToString:@"userProfilePush"])
-//    {
-//        
-//    }
-//}
 - (IBAction)unwindFromCommentVC:(UIStoryboardSegue *)sender
 {
     
