@@ -118,23 +118,23 @@
 
 }
 
-- (void) getCommentsForPost: (Post *)post
-{
-
-    PFQuery *commentsQuery = [Comment query];
-    [commentsQuery whereKey:@"post" equalTo:post];
-    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-    {
-        if (error)
-        {
-            NSLog(@"%@",error.localizedDescription);
-        }else{
-            self.currentCommentsArray = objects;
-            [self.collectionView reloadData];
-        }
-    }];
-}
-
+//- (void) getCommentsForPost: (Post *)post
+//{
+//
+//    PFQuery *commentsQuery = [Comment query];
+//    [commentsQuery whereKey:@"post" equalTo:post];
+//    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+//    {
+//        if (error)
+//        {
+//            NSLog(@"%@",error.localizedDescription);
+//        }else{
+//            self.currentCommentsArray = objects;
+//            [self.collectionView reloadData];
+//        }
+//    }];
+//}
+//
 
 
 
@@ -271,7 +271,7 @@ shouldBeginLogInWithUsername:(NSString *)username
 {
     
     Post *post = self.postArray[indexPath.row];
-    [self getCommentsForPost:post];
+//    [self getCommentsForPost:post];
     Photo *photo = post.photo;
     PFFile *imageFile = photo.image;
     
@@ -298,9 +298,9 @@ shouldBeginLogInWithUsername:(NSString *)username
     {
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
 //        detailCell.commentWebView loadHTMLString:<#(NSString *)#> baseURL:<#(NSURL *)#>
-        for (Comment *comment in self.currentCommentsArray) {
-            NSLog(@"%@",comment.commentText);
-        }
+//        for (Comment *comment in self.currentCommentsArray) {
+//            NSLog(@"%@",comment.commentText);
+//        }
 
         return detailCell;
     }
