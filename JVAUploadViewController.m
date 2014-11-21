@@ -12,7 +12,7 @@
 #import "Post.h"
 #import "Photo.h"
 #import "JVAProfileViewController.h"
-@interface JVAUploadViewController ()<UIImagePickerControllerDelegate>
+@interface JVAUploadViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;

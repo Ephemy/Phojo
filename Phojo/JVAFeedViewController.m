@@ -33,6 +33,9 @@
 {
     [super viewDidLoad];
     //    [PFUser logOut];
+    
+    self.collectionView.backgroundColor = [UIColor clearColor];
+
     self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
     
     
@@ -324,7 +327,7 @@ shouldBeginLogInWithUsername:(NSString *)username
  */
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
 {
-    [self dismissModalViewControllerAnimated:YES];}
+    [self dismissViewControllerAnimated:YES completion:nil];}
 
 /*!
  @abstract Sent to the delegate when the sign up attempt fails.

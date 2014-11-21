@@ -218,7 +218,7 @@
                                     <outlet property="delegate" destination="gsx-iF-hhc" id="kdT-qt-hxz"/>
                                 </connections>
                             </collectionView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="da0-40-RpM">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="da0-40-RpM">
                                 <rect key="frame" x="16" y="72" width="128" height="128"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -381,6 +381,7 @@
                         <outlet property="followButton" destination="hI8-7J-Mj3" id="qFN-hE-cRf"/>
                         <outlet property="followersButton" destination="EcF-63-V6D" id="IIM-h0-fkC"/>
                         <outlet property="followingButton" destination="SK2-et-Js1" id="T2c-a6-S4f"/>
+                        <outlet property="longPressRecognizer" destination="TgV-jK-zcw" id="jOm-oc-BlU"/>
                         <outlet property="nameLabel" destination="NG3-ut-MyE" id="JxV-Ub-VUu"/>
                         <outlet property="profileImageView" destination="da0-40-RpM" id="CWw-B8-rYW"/>
                         <outlet property="usernameLabel" destination="bvz-70-diu" id="onM-Mw-YOd"/>
@@ -390,7 +391,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ku2-Nl-TCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="TgV-jK-zcw">
                     <connections>
-                        <outlet property="delegate" destination="gsx-iF-hhc" id="aS5-FL-VS3"/>
+                        <action selector="onProfileImageLongPressed:" destination="gsx-iF-hhc" id="l1a-Ti-zDh"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
