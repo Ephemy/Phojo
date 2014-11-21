@@ -14,7 +14,6 @@
 @interface JVACommentViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
 @property (weak, nonatomic) IBOutlet UITextField *commentTextField;
 @property (weak, nonatomic) IBOutlet UITableView *commentViewTable;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
@@ -145,7 +144,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"matchCell" forIndexPath:indexPath];
         Phojer *phojer = self.matchingUsersArray[indexPath.row];
         cell.textLabel.text = phojer.name;
-        
+        cell.detailTextLabel.text = phojer.username;
         
         
     }
