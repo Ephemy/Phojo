@@ -36,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        [PFUser logOut];
+//        [PFUser logOut];
     self.totalCommentsArray = [@[] mutableCopy];
     self.collectionView.backgroundColor = [UIColor clearColor];
 
