@@ -42,8 +42,9 @@
     
     //    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
     
-    
-    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+
+
 }
 
 
