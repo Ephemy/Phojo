@@ -121,7 +121,8 @@
             PFQuery *postsQuery = [Post query];
             [postsQuery whereKey:@"poster" containedIn:self.followingArray];
             [postsQuery includeKey:@"photo"];
-            [postsQuery includeKey:@"poster"];
+//            [postsQuery includeKey:@"poster"];
+//            [postsQuery includeKey:@"caption"];
             
             
             
@@ -402,7 +403,6 @@ shouldBeginLogInWithUsername:(NSString *)username
         
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
         NSMutableString *finalString = [NSMutableString string];
-        Comment *firstComment = [Comment object];
         
         
         if(self.passedPost){
@@ -444,6 +444,9 @@ shouldBeginLogInWithUsername:(NSString *)username
         [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
         detailCell.postValue = self.postArray[indexPath.section];
         
+
+        Post *captionPost = self.postArray[indexPath.section];
+        [detailCell.captionWebView loadHTMLString:captionPost.caption baseURL:nil];
         //later implementation of user label
         //        Phojer *poster = firstComment.post.poster;
         //        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
