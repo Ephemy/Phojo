@@ -97,9 +97,28 @@
             newPhotoObject.image = imageFile;
             
             Post *newPost = [Post object];
+            NSString *stringCheck = self.captionTextView.text;
             newPost.caption = self.captionTextView.text;
             newPost.poster = self.currentPhojer;
             newPost.photo = newPhotoObject;
+            NSMutableArray *tagsArray = [NSMutableArray array];
+
+            
+            NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"(#(\\w+))"
+                                                                                   options:0
+                                                                                     error:&error];
+            NSArray * matches = [regex matchesInString:stringCheck options:0 range:NSMakeRange(0, [stringCheck length])];
+            for (NSTextCheckingResult* match in matches ) {
+                
+                NSRange wordRange = [match rangeAtIndex:1];
+                NSString* word = [stringCheck substringWithRange:wordRange];
+                word = [word substringFromIndex:1];
+                NSLog(@"%@", word);
+
+                [tagsArray addObject:word];
+                
+            }
+            newPost.tags = tagsArray;
             
             [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
