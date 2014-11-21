@@ -71,7 +71,9 @@
     
     //    Post *post = [Post object];
     PFQuery *photoQuery = [Post query];
-    [photoQuery whereKey:@"objectId" equalTo:@"vlfTvWMCOe"];
+    [photoQuery whereKey:@"objectId" equalTo:@"URxVDbAAbW"];
+//        [photoQuery whereKey:@"objectId" equalTo:self.currentPost];
+
     [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         Post *post = objects.firstObject;
         //        self.currentPost = post;
@@ -143,6 +145,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"matchCell" forIndexPath:indexPath];
         Phojer *phojer = self.matchingUsersArray[indexPath.row];
         cell.textLabel.text = phojer.name;
+        
         
         
     }

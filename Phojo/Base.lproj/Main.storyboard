@@ -750,9 +750,9 @@
         <image name="default" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OLX-J7-kqY"/>
         <segue reference="AAO-2h-Po8"/>
         <segue reference="P0i-x4-inb"/>
         <segue reference="lie-gb-ABH"/>
+        <segue reference="OLX-J7-kqY"/>
     </inferredMetricsTieBreakers>
 </document>

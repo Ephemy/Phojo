@@ -9,6 +9,7 @@
 #import "JVAFeedViewController.h"
 #import "JVAPhotoCollectionViewCell.h"
 #import "JVAPostDetailCollectionViewCell.h"
+#import "JVACommentViewController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "Post.h"
@@ -393,15 +394,20 @@ shouldBeginLogInWithUsername:(NSString *)username
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
         NSMutableString *finalString = [NSMutableString string];
         
+        Comment *firstComment = self.currentCommentsArray.firstObject;
         for (Comment *comment in self.currentCommentsArray) {
             NSLog(@"%@",comment.commentText);
             NSString *resultString = [self createTagsFromTextField:comment.commentText];
 
             [finalString appendString:resultString];
             [finalString appendString: @"</br>"];
+//            NSLog(@"%@", comment.post.caption);
+
         }
        
         [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
+//        NSLog(@"%@", detailCell.postValue.caption);
+//        detailCell.postValue = firstComment.post;
         
         return detailCell;
     }
@@ -409,7 +415,14 @@ shouldBeginLogInWithUsername:(NSString *)username
     
 }
 
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton *)button
+{
+    
+//    JVAPostDetailCollectionViewCell *cell = [[button superview] superview] ;
+//    Post *post = cell.postValue;
+//    JVACommentViewController *JVAcommentVC = segue.destinationViewController;
+//    JVAcommentVC.currentPost = post;
+}
 - (IBAction)unwindFromCommentVC:(UIStoryboardSegue *)sender
 {
     
