@@ -35,6 +35,7 @@
     [super viewDidLoad];
     [self commentTaggingDetected];
     [self refreshDisplay];
+    self.commentTextField.delegate = self;
     
     
     //    Phojer *phojer = [[PFUser currentUser] objectForKey:@"Phojer"];
@@ -44,13 +45,12 @@
     }];
 }
 
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    [self.view addSubview:self.toolBar];
-//    self.toolBar.frame = CGRectMake(0, 84, self.view.frame.size.width, self.toolBar.frame.size.height);
-//
-//}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.userTaggingTableView.contentInset = self.commentViewTable.contentInset;
+    self.userTaggingTableView.scrollIndicatorInsets = self.commentViewTable.scrollIndicatorInsets;
+}
 
 -(void)viewDidLayoutSubviews
 {
@@ -260,7 +260,35 @@
     
 }
 
+#pragma mark: UITextField Methods
 
+//code for pushing textfield above keyboard
+
+
+//- (void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    [self animateTextField: textField up: YES];
+//}
+//
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    [self animateTextField: textField up: NO];
+//}
+//
+//- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+//{
+//    const int movementDistance = 200; // tweak as needed
+//    const float movementDuration = 0.3f; // tweak as needed
+//    
+//    int movement = (up ? -movementDistance : movementDistance);
+//    
+//    [UIView beginAnimations: @"anim" context: nil];
+//    [UIView setAnimationBeginsFromCurrentState: YES];
+//    [UIView setAnimationDuration: movementDuration];
+//    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+//    [UIView commitAnimations];
+//}
 
 
 
