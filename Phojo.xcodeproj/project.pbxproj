@@ -44,6 +44,7 @@
 		8DC3BEDC1A1C01E500F29E08 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BEDB1A1C01E500F29E08 /* Photo.m */; };
 		8DC3BEDF1A1C01EF00F29E08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BEDE1A1C01EF00F29E08 /* Comment.m */; };
 		8DF4F4A11A1F3C09009AE2F7 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DF4F4A01A1F3C09009AE2F7 /* Media.xcassets */; };
+		8DF4F4A41A1FB882009AE2F7 /* JVAPhotoSearchCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DF4F4A31A1FB882009AE2F7 /* JVAPhotoSearchCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,8 @@
 		8DC3BEDD1A1C01EF00F29E08 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		8DC3BEDE1A1C01EF00F29E08 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		8DF4F4A01A1F3C09009AE2F7 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		8DF4F4A21A1FB882009AE2F7 /* JVAPhotoSearchCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVAPhotoSearchCollectionViewController.h; path = ../JVAPhotoSearchCollectionViewController.h; sourceTree = "<group>"; };
+		8DF4F4A31A1FB882009AE2F7 /* JVAPhotoSearchCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVAPhotoSearchCollectionViewController.m; path = ../JVAPhotoSearchCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +193,8 @@
 				8D0C9C621A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m */,
 				8D3F54391A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.h */,
 				8D3F543A1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m */,
+				8DF4F4A21A1FB882009AE2F7 /* JVAPhotoSearchCollectionViewController.h */,
+				8DF4F4A31A1FB882009AE2F7 /* JVAPhotoSearchCollectionViewController.m */,
 				7B24D7B11A1AD1E0001F2236 /* LaunchScreen.xib */,
 				7B24D7A61A1AD1E0001F2236 /* Phojo.xcdatamodeld */,
 				8DF4F4A01A1F3C09009AE2F7 /* Media.xcassets */,
@@ -377,6 +382,7 @@
 				8D3F543B1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m in Sources */,
 				8DC3BED51A1C01AC00F29E08 /* Phojer.m in Sources */,
 				8D0C9C5D1A1AD87C006E7F0C /* JVAUserListViewController.m in Sources */,
+				8DF4F4A41A1FB882009AE2F7 /* JVAPhotoSearchCollectionViewController.m in Sources */,
 				8D0C9C631A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m in Sources */,
 				8D0C9C571A1AD835006E7F0C /* JVAProfileViewController.m in Sources */,
 				8DC3BEDF1A1C01EF00F29E08 /* Comment.m in Sources */,

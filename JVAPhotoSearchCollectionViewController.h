@@ -1,0 +1,13 @@
+//
+//  PhotoSearchCollectionViewController.h
+//  Phojo
+//
+//  Created by Mobile Making on 11/21/14.
+//  Copyright (c) 2014 Jonathan Chou. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface JVAPhotoSearchCollectionViewController : UICollectionViewController
+
+@end

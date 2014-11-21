@@ -19,5 +19,6 @@
 @property PFGeoPoint *location;
 @property Photo *photo;
 @property Phojer *poster;
+@property NSArray *tags;
 
 @end

@@ -9,14 +9,17 @@
 #import "JVAUserListViewController.h"
 #import "JVAProfileViewController.h"
 #import "Phojer.h"
+#import "Post.h"
 
 @interface JVAUserListViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *searchToggle;
 
 @property Phojer *currentPhojer;
 @property NSMutableArray *phojers;
+@property NSMutableArray *hashtags;
 @property NSArray *phojersFollowed;
 
 @end
@@ -102,9 +105,10 @@
 
         self.tableView.contentInset = UIEdgeInsetsMake(self.searchBar.frame.size.height, 0, 0, 0);
 
-        self.title = @"Search";
-
         self.showFollowing = YES;
+
+        [self.searchToggle setHidden:NO];
+
     }
 
 }
@@ -127,36 +131,77 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+//    [self performSegueWithIdentifier:@"segueToProfile" sender:self];
+
+    [self performSegueWithIdentifier:@"segueToPhotoResults" sender:self];
+
+}
+
 #pragma mark - seach bar delegates
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-
-    if ([searchText isEqualToString:@""])
+    if (self.searchToggle.selectedSegmentIndex == 0)
     {
-        self.phojers = [self.phojersFollowed mutableCopy];
-        [self.tableView reloadData];
+        if ([searchText isEqualToString:@""])
+        {
+            self.phojers = [self.phojersFollowed mutableCopy];
+            [self.tableView reloadData];
+        }
+        else
+        {
+
+            PFQuery *nameQuery = [Phojer query];
+            [nameQuery whereKey:@"name" containsString:searchText];
+
+            PFQuery *usernameQuery = [Phojer query];
+            [usernameQuery whereKey:@"username" containsString:searchText];
+
+            PFQuery *query = [PFQuery orQueryWithSubqueries:@[nameQuery, usernameQuery]];
+
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error)
+                {
+                    //TODO: error check
+                }
+                else
+                {
+                    self.phojers = [objects mutableCopy];
+                    [self.tableView reloadData];
+                }
+            }];
+            
+        }
+
     }
     else
     {
 
-        PFQuery *nameQuery = [Phojer query];
-        [nameQuery whereKey:@"name" containsString:searchText];
+        self.hashtags = [@[] mutableCopy];
+        PFQuery *query = [Post query];
+        [query whereKey:@"tags" containsString:searchText];
 
-        PFQuery *usernameQuery = [Phojer query];
-        [usernameQuery whereKey:@"username" containsString:searchText];
-
-        PFQuery *query = [PFQuery orQueryWithSubqueries:@[nameQuery, usernameQuery]];
+        [query includeKey:@"photo"];
 
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
             if (error)
             {
-                //TODO: error check
+                //TODO: check error
             }
             else
             {
-                self.phojers = [objects mutableCopy];
-                [self.tableView reloadData];
+                for (Post *post in objects)
+                {
+                    if ([post.tags containsObject:searchText] && ![self.hashtags containsObject:searchText])
+                    {
+                        [self.hashtags addObject:searchText];
+                    }
+                }
+                
             }
         }];
 
