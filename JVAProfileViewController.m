@@ -428,6 +428,8 @@
         Post *post = self.posts[index];
         vc.passedPost = post;
 
+        vc.passedPhojer = self.viewedPhojer;
+
     }
 
 }

@@ -27,7 +27,7 @@
 @property (strong, nonatomic) NSArray *currentCommentsArray;
 @property (strong, nonatomic) NSMutableArray *totalCommentsArray;
 @property NSString *stringToPass;
-@property Phojer *passedPhojer;
+@property Phojer *tappedPhojer;
 
 @end
 
@@ -42,7 +42,6 @@
     
     //    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
     
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
 
 }
@@ -59,6 +58,7 @@
         login.delegate = self;
         login.signUpController.delegate = self;
         [self presentViewController:login animated:YES completion:nil];
+        
     }
     else{
         //        [self alertViewStuff];
@@ -69,6 +69,7 @@
     
     if (self.passedPost)
     {
+        self.title = self.passedPhojer.username;
         self.postArray = @[self.passedPost];
         
         //for every post in feed, get comments.
@@ -82,6 +83,8 @@
     }
     else
     {
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+
         [self queryAndLoad];
     }
     
@@ -350,7 +353,7 @@
         [query whereKey:@"username" equalTo:self.stringToPass];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            self.passedPhojer = objects.firstObject;
+            self.tappedPhojer = objects.firstObject;
             
             [self performSegueWithIdentifier:@"userProfilePush" sender:self];
             
@@ -486,11 +489,13 @@ shouldBeginLogInWithUsername:(NSString *)username
                 NSString *resultString = [self createTagsFromTextField:comment.commentText];
                 
                 
+                [finalString appendString:@"<font face=\"helvetica\">"];
                 [finalString appendString:resultString];
                 [finalString appendString: @"</br>"];
                 [finalString appendFormat:@"–––––"];
                 [finalString appendString: @"</br>"];
-                
+                [finalString appendString:@"</font>"];
+
             }
         }
         
@@ -504,11 +509,13 @@ shouldBeginLogInWithUsername:(NSString *)username
                 NSString *resultString = [self createTagsFromTextField:comment.commentText];
                 
                 
+                [finalString appendString:@"<font face=\"helvetica\">"];
                 [finalString appendString:resultString];
                 [finalString appendString: @"</br>"];
                 [finalString appendFormat:@"–––––"];
                 [finalString appendString: @"</br>"];
-                
+                [finalString appendString:@"</font>"];
+
             }
         }
         
@@ -517,9 +524,15 @@ shouldBeginLogInWithUsername:(NSString *)username
         [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
         detailCell.postValue = self.postArray[indexPath.section];
         
-
+        NSMutableString *captionString = [NSMutableString string];
         Post *captionPost = self.postArray[indexPath.section];
-        [detailCell.captionWebView loadHTMLString:captionPost.caption baseURL:nil];
+
+        [captionString appendString:@"<font face=\"helvetica\">"];
+        [captionString appendString:captionPost.caption];
+        [captionString appendString:@"</font>"];
+
+
+        [detailCell.captionWebView loadHTMLString:captionString baseURL:nil];
         //later implementation of user label
         //        Phojer *poster = firstComment.post.poster;
         //        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
@@ -548,7 +561,7 @@ shouldBeginLogInWithUsername:(NSString *)username
         UINavigationController *navVC = segue.destinationViewController;
         
         JVAProfileViewController *JVAprofileVC = navVC.childViewControllers.firstObject;
-        JVAprofileVC.passedPhojer = self.passedPhojer;
+        JVAprofileVC.passedPhojer = self.tappedPhojer;
         
     }
 }

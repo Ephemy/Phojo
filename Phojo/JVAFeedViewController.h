@@ -11,6 +11,7 @@
 @class Post;
 @interface JVAFeedViewController : UIViewController
 @property Post *passedPost;
+@property Phojer *passedPhojer;
 @property Phojer *currentPhojer;
 @end
 
