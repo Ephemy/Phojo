@@ -76,13 +76,13 @@
         self.longPressRecognizer.enabled = YES;
     }
 
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 
     [super viewWillAppear:animated];
-
 
     [self.viewedPhojer fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (error)
@@ -107,7 +107,9 @@
             }];
 
             self.nameLabel.text = self.viewedPhojer.name;
+            self.nameLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:24.0];
             self.usernameLabel.text = self.viewedPhojer.username;
+            self.title = self.viewedPhojer.username;
 
             PFQuery *query = [Post query];
 
@@ -166,6 +168,11 @@
 
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+
+}
 
 #pragma mark - collection view methods
 
@@ -420,6 +427,8 @@
 
         Post *post = self.posts[index];
         vc.passedPost = post;
+
+        vc.passedPhojer = self.viewedPhojer;
 
     }
 

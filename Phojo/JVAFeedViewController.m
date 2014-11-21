@@ -29,7 +29,7 @@
 @property (strong, nonatomic) NSArray *currentCommentsArray;
 @property (strong, nonatomic) NSMutableArray *totalCommentsArray;
 @property NSString *stringToPass;
-@property Phojer *passedPhojer;
+@property Phojer *tappedPhojer;
 @property MFMailComposeViewController *mailCount;
 
 @end
@@ -49,6 +49,7 @@
     
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -60,6 +61,7 @@
         login.delegate = self;
         login.signUpController.delegate = self;
         [self presentViewController:login animated:YES completion:nil];
+        
     }
     else{
         //        [self alertViewStuff];
@@ -70,6 +72,7 @@
     
     if (self.passedPost)
     {
+        self.title = self.passedPhojer.username;
         self.postArray = @[self.passedPost];
         
         //for every post in feed, get comments.
@@ -83,6 +86,8 @@
     }
     else
     {
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+
         [self queryAndLoad];
     }
     
@@ -255,6 +260,70 @@
     //if there are no @mentions then just return original string
     if(matches.count == 0)
     {
+        NSMutableString *result = [self createHashTagsFromTextField:[string mutableCopy]];
+        return result;
+    }
+    
+    //otherwise iterate through and wrap the code into html format
+    else
+    {
+        for (NSTextCheckingResult *match in matches) {
+            NSRange wordRange = [match rangeAtIndex:1];
+            NSLog(@"%lu", (unsigned long)wordRange.location);
+            NSString* word = [string substringWithRange:wordRange];
+            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://comments/comments/%@\">@%@</a> ",word, word];
+            
+            //keep track of code that is not @mentions for merging later
+            NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
+            
+            lastString = stringURL;
+            NSLog(@"%@", subString);
+            
+            //finish appending strings
+            [theMasterString appendString:subString];
+            [theMasterString appendString:stringURL];
+            
+            //keeps track
+            lastPoint = (int)wordRange.location;
+            lastWordLength = (int)word.length + 1;
+            
+        }
+        
+        //in case there is text after the @mention
+        NSString *lastSubString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, string.length - lastPoint - lastWordLength )];
+        NSLog(@"%@", lastSubString);
+        if(lastSubString != nil)
+        {
+            [theMasterString appendString:lastSubString];
+        }
+        NSLog(@"%@", theMasterString );
+        theMasterString = [self createHashTagsFromTextField:theMasterString];
+        return theMasterString;
+    }
+    //    [self.phojoWebView loadHTMLString:theMasterString baseURL:nil];
+}
+
+//same scan for hashtags
+- (NSMutableString *)createHashTagsFromTextField:(NSMutableString *)string
+
+{
+    
+    //the string to rule them all - string initiation
+    NSMutableString *theMasterString = [NSMutableString string];
+    
+    //save the indices of the string while scanning to concatenate later
+    int lastPoint = 0;
+    int lastWordLength = 0;
+    NSString *lastString = [NSString string];
+    
+    //creates a regex filter to search for substrings that begin with @
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"#(\\w+)" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(0, string.length)];
+    
+    //if there are no @mentions then just return original string
+    if(matches.count == 0)
+    {
         return string;
     }
     
@@ -265,7 +334,7 @@
             NSRange wordRange = [match rangeAtIndex:1];
             NSLog(@"%lu", (unsigned long)wordRange.location);
             NSString* word = [string substringWithRange:wordRange];
-            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/%@\">@%@</a> ",word, word];
+            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/hashtag/%@\">#%@</a> ",word, word];
             
             //keep track of code that is not @mentions for merging later
             NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
@@ -283,17 +352,30 @@
             
         }
         NSLog(@"%@", theMasterString );
+        NSString *lastSubString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, string.length - lastPoint - lastWordLength )];
+        NSLog(@"%@", lastSubString);
+        if(lastSubString != nil)
+        {
+            [theMasterString appendString:lastSubString];
+        }
         return theMasterString;
     }
     //    [self.phojoWebView loadHTMLString:theMasterString baseURL:nil];
 }
+
+
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     //on link clicked
     if(navigationType == UIWebViewNavigationTypeLinkClicked){
         
+        
         NSURL *theURL = request.URL;
+        
+        if([[theURL pathComponents][1] isEqualToString:@"comments"])
+        {
+        
         self.stringToPass = [theURL lastPathComponent];
         
         PFQuery *query = [Phojer query];
@@ -302,12 +384,13 @@
         [query whereKey:@"username" equalTo:self.stringToPass];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            self.passedPhojer = objects.firstObject;
+            self.tappedPhojer = objects.firstObject;
             
             [self performSegueWithIdentifier:@"userProfilePush" sender:self];
             
             
         }];
+        }
         
         return NO;
     }
@@ -438,11 +521,13 @@ shouldBeginLogInWithUsername:(NSString *)username
                 NSString *resultString = [self createTagsFromTextField:comment.commentText];
                 
                 
+                [finalString appendString:@"<font face=\"helvetica\">"];
                 [finalString appendString:resultString];
                 [finalString appendString: @"</br>"];
                 [finalString appendFormat:@"–––––"];
                 [finalString appendString: @"</br>"];
-                
+                [finalString appendString:@"</font>"];
+
             }
         }
         
@@ -456,11 +541,13 @@ shouldBeginLogInWithUsername:(NSString *)username
                 NSString *resultString = [self createTagsFromTextField:comment.commentText];
                 
                 
+                [finalString appendString:@"<font face=\"helvetica\">"];
                 [finalString appendString:resultString];
                 [finalString appendString: @"</br>"];
                 [finalString appendFormat:@"–––––"];
                 [finalString appendString: @"</br>"];
-                
+                [finalString appendString:@"</font>"];
+
             }
         }
         
@@ -469,9 +556,18 @@ shouldBeginLogInWithUsername:(NSString *)username
         [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
         detailCell.postValue = self.postArray[indexPath.section];
         
-
+        NSMutableString *captionString = [NSMutableString string];
         Post *captionPost = self.postArray[indexPath.section];
-        [detailCell.captionWebView loadHTMLString:captionPost.caption baseURL:nil];
+        NSString *modifiedString = captionPost.caption;
+        
+        NSString *inputCaption = [self createTagsFromTextField:modifiedString];
+
+        [captionString appendString:@"<font face=\"helvetica\">"];
+        [captionString appendString:inputCaption];
+        [captionString appendString:@"</font>"];
+
+
+        [detailCell.captionWebView loadHTMLString:captionString baseURL:nil];
         //later implementation of user label
         //        Phojer *poster = firstComment.post.poster;
         //        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
@@ -500,7 +596,7 @@ shouldBeginLogInWithUsername:(NSString *)username
         UINavigationController *navVC = segue.destinationViewController;
         
         JVAProfileViewController *JVAprofileVC = navVC.childViewControllers.firstObject;
-        JVAprofileVC.passedPhojer = self.passedPhojer;
+        JVAprofileVC.passedPhojer = self.tappedPhojer;
         
     }
 }

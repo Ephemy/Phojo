@@ -39,7 +39,6 @@
     }
     self.captionTextView.delegate = self;
     self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
-    
 
 }
 

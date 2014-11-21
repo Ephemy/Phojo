@@ -20,6 +20,23 @@
 
     [Parse setApplicationId:@"wwxLKOYHgWupMfvHtbCosmdQzbrVv1dLeSAFJt17" clientKey:@"2Q3I6XIWYpYFmqgKMNgJUn7aesqhB3klg23DvMXv"];
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    UIColor *darkColor = [UIColor colorWithRed:30.0/255.0 green:141.0/255.0 blue:139.0/255.0 alpha:1];
+    UIColor *lightColor = [UIColor colorWithRed:109.0/255.0 green:204.0/255.0 blue:200.0/255.0 alpha:1];
+
+    [[UINavigationBar appearance] setBarTintColor:darkColor];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setBarTintColor:darkColor];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+
+    [[UIView appearanceWhenContainedIn:[UITabBar class], nil] setTintColor:lightColor];
+
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
+                                                           [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:lightColor, NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+
     return YES;
 }
 

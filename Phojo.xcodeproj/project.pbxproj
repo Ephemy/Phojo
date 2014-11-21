@@ -15,7 +15,6 @@
 		7B24D7A81A1AD1E0001F2236 /* Phojo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A61A1AD1E0001F2236 /* Phojo.xcdatamodeld */; };
 		7B24D7AB1A1AD1E0001F2236 /* JVAFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7AA1A1AD1E0001F2236 /* JVAFeedViewController.m */; };
 		7B24D7AE1A1AD1E0001F2236 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B24D7AC1A1AD1E0001F2236 /* Main.storyboard */; };
-		7B24D7B01A1AD1E0001F2236 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B24D7AF1A1AD1E0001F2236 /* Images.xcassets */; };
 		7B24D7B31A1AD1E0001F2236 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B24D7B11A1AD1E0001F2236 /* LaunchScreen.xib */; };
 		7B24D7BF1A1AD1E0001F2236 /* PhojoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7BE1A1AD1E0001F2236 /* PhojoTests.m */; };
 		8D0C9C541A1AD7D3006E7F0C /* JVACommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C9C531A1AD7D3006E7F0C /* JVACommentViewController.m */; };
@@ -44,6 +43,7 @@
 		8DC3BED91A1C01E000F29E08 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BED81A1C01E000F29E08 /* Post.m */; };
 		8DC3BEDC1A1C01E500F29E08 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BEDB1A1C01E500F29E08 /* Photo.m */; };
 		8DC3BEDF1A1C01EF00F29E08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3BEDE1A1C01EF00F29E08 /* Comment.m */; };
+		8DF4F4A11A1F3C09009AE2F7 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DF4F4A01A1F3C09009AE2F7 /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,6 @@
 		7B24D7A91A1AD1E0001F2236 /* JVAFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JVAFeedViewController.h; sourceTree = "<group>"; };
 		7B24D7AA1A1AD1E0001F2236 /* JVAFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JVAFeedViewController.m; sourceTree = "<group>"; };
 		7B24D7AD1A1AD1E0001F2236 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7B24D7AF1A1AD1E0001F2236 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7B24D7B21A1AD1E0001F2236 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7B24D7B81A1AD1E0001F2236 /* PhojoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhojoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B24D7BD1A1AD1E0001F2236 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		8DC3BEDB1A1C01E500F29E08 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		8DC3BEDD1A1C01EF00F29E08 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		8DC3BEDE1A1C01EF00F29E08 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		8DF4F4A01A1F3C09009AE2F7 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,9 +190,9 @@
 				8D0C9C621A1ADEDF006E7F0C /* JVAPostDetailCollectionViewCell.m */,
 				8D3F54391A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.h */,
 				8D3F543A1A1B23F900FB0CF7 /* JVAThumbnailCollectionViewCell.m */,
-				7B24D7AF1A1AD1E0001F2236 /* Images.xcassets */,
 				7B24D7B11A1AD1E0001F2236 /* LaunchScreen.xib */,
 				7B24D7A61A1AD1E0001F2236 /* Phojo.xcdatamodeld */,
+				8DF4F4A01A1F3C09009AE2F7 /* Media.xcassets */,
 				8DC3BED61A1C01B600F29E08 /* Model */,
 				7B24D79F1A1AD1E0001F2236 /* Supporting Files */,
 			);
@@ -347,8 +347,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B24D7AE1A1AD1E0001F2236 /* Main.storyboard in Resources */,
+				8DF4F4A11A1F3C09009AE2F7 /* Media.xcassets in Resources */,
 				7B24D7B31A1AD1E0001F2236 /* LaunchScreen.xib in Resources */,
-				7B24D7B01A1AD1E0001F2236 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

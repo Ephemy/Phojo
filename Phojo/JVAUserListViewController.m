@@ -44,6 +44,7 @@
     // query for phojers current phojer is following
     if (self.showFollowing)
     {
+        self.title = @"Following";
 
         PFRelation *following = [self.passedPhojer relationForKey:@"following"];
         PFQuery *followingQuery = [following query];
@@ -100,6 +101,8 @@
         self.searchBar.frame = CGRectMake(0, offsetFromTop, [UIScreen mainScreen].bounds.size.width, self.searchBar.frame.size.height);
 
         self.tableView.contentInset = UIEdgeInsetsMake(self.searchBar.frame.size.height, 0, 0, 0);
+
+        self.title = @"Search";
 
         self.showFollowing = YES;
     }
