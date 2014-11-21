@@ -44,13 +44,12 @@
     }];
 }
 
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    [self.view addSubview:self.toolBar];
-//    self.toolBar.frame = CGRectMake(0, 84, self.view.frame.size.width, self.toolBar.frame.size.height);
-//
-//}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.userTaggingTableView.contentInset = self.commentViewTable.contentInset;
+    self.userTaggingTableView.scrollIndicatorInsets = self.commentViewTable.scrollIndicatorInsets;
+}
 
 -(void)viewDidLayoutSubviews
 {

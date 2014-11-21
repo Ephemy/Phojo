@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSArray *postArray;
 @property (strong, nonatomic) NSArray *followingArray;
 @property (strong, nonatomic) NSArray *currentCommentsArray;
+@property (strong, nonatomic) NSMutableArray *totalCommentsArray;
 @property NSString *stringToPass;
 @property Phojer *passedPhojer;
 
@@ -35,8 +36,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//        [PFUser logOut];
-
+        [PFUser logOut];
+    self.totalCommentsArray = [@[] mutableCopy];
     self.collectionView.backgroundColor = [UIColor clearColor];
 
     self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
@@ -48,6 +49,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
+
+    self.totalCommentsArray = [@[] mutableCopy];
+
     
     if([PFUser currentUser] == nil){
         PFLogInViewController *login = [[PFLogInViewController alloc] init];
@@ -131,17 +136,34 @@
                     
                     //for every post in feed, get comments.
                     for(Post *post in self.postArray)
-                        [self getCommentsForPost:post onCompletionHandler:^(NSArray *array) {
-                           
+                        
+                        [self getCommentsForPost:post onCompletionHandler:^(NSArray *array)
+                    {
+                        if(self.passedPost)
+                        {
                             self.currentCommentsArray = array;
-                            
                             [self.collectionView reloadData];
+                        }
+                        else
+                        {
+
+                            if(array == nil)
+                            {
+//                                [self.totalCommentsArray addObject:[NSNull null]];
+                            }
                             
-                        }];
+                            [self.totalCommentsArray addObject:array];
+                            
+                        }
+                        [self.collectionView reloadData];
+
+                    }];
+                }
+                
                     //- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
                     
                     
-                }
+                
                 
             }];
             
@@ -169,6 +191,7 @@
          {
              NSLog(@"%@",error.localizedDescription);
          }else{
+             
              complete(objects);
          }
      }];
@@ -425,11 +448,18 @@ shouldBeginLogInWithUsername:(NSString *)username
         
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
         NSMutableString *finalString = [NSMutableString string];
+        Comment *firstComment = [Comment object];
         
-        Comment *firstComment = self.currentCommentsArray.firstObject;
-        for (Comment *comment in self.currentCommentsArray) {
+        
+        if(self.passedPost){
+            firstComment = self.currentCommentsArray.firstObject;
+
+        for (Comment *comment in self.currentCommentsArray)
+        {
+            
             NSLog(@"%@",comment.commentText);
             NSString *resultString = [self createTagsFromTextField:comment.commentText];
+        
 
             [finalString appendString:resultString];
             [finalString appendString: @"</br>"];
@@ -440,10 +470,39 @@ shouldBeginLogInWithUsername:(NSString *)username
 //            NSLog(@"%@", comment.post.caption);
 
         }
+        }
+        
+        else
+            
+        {
+//            NSArray *testArray = self.totalCommentsArray.firstObject;
+//            firstComment = testArray.firstObject;
+
+            
+            for (Comment *comment in self.totalCommentsArray[indexPath.section])
+            {
+                
+                NSLog(@"%@",comment.commentText);
+                NSString *resultString = [self createTagsFromTextField:comment.commentText];
+                
+                
+                [finalString appendString:resultString];
+                [finalString appendString: @"</br>"];
+                [finalString appendFormat:@"–––––"];
+                [finalString appendString: @"</br>"];
+                
+                
+                //            NSLog(@"%@", comment.post.caption);
+                
+            }
+        }
+        
+        
        
         [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
 //        NSLog(@"%@", detailCell.postValue.caption);
-        detailCell.postValue = firstComment.post;
+        detailCell.postValue = self.postArray[indexPath.section];
+        
 //        Phojer *poster = firstComment.post.poster;
 //        [detailCell.userButton setTitle:firstComment.post.poster.username forState:UIControlStateNormal];
         return detailCell;
@@ -458,7 +517,9 @@ shouldBeginLogInWithUsername:(NSString *)username
     
     JVAPostDetailCollectionViewCell *cell = (JVAPostDetailCollectionViewCell *)[[button superview] superview] ;
     Post *post = cell.postValue;
+        
     JVACommentViewController *JVAcommentVC = segue.destinationViewController;
+        
     JVAcommentVC.currentPost = post;
         
     }
