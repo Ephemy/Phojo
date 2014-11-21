@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3908AB191A1F248F00253326 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3908AB181A1F248F00253326 /* MessageUI.framework */; };
 		7B1012821A1C0A29003B9EF3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1012811A1C0A29003B9EF3 /* ParseUI.framework */; };
 		7B1012841A1C0A33003B9EF3 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1012831A1C0A33003B9EF3 /* ParseFacebookUtils.framework */; };
 		7B24D7A21A1AD1E0001F2236 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24D7A11A1AD1E0001F2236 /* main.m */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3908AB181A1F248F00253326 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7B1012811A1C0A29003B9EF3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		7B1012831A1C0A33003B9EF3 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		7B24D79C1A1AD1E0001F2236 /* Phojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3908AB191A1F248F00253326 /* MessageUI.framework in Frameworks */,
 				8D3F54381A1B0C9000FB0CF7 /* AudioToolbox.framework in Frameworks */,
 				8D3F54361A1B0C8800FB0CF7 /* CFNetwork.framework in Frameworks */,
 				8D3F54341A1B0C7C00FB0CF7 /* CoreGraphics.framework in Frameworks */,
@@ -225,6 +228,7 @@
 		8D0C9C641A1B0045006E7F0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3908AB181A1F248F00253326 /* MessageUI.framework */,
 				7B1012831A1C0A33003B9EF3 /* ParseFacebookUtils.framework */,
 				7B1012811A1C0A29003B9EF3 /* ParseUI.framework */,
 				8D3F54371A1B0C9000FB0CF7 /* AudioToolbox.framework */,

@@ -17,7 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextView *captionTextView;
-@property BOOL appeared;
+@property BOOL imageHasBeenSelected;
 @property Phojer *currentPhojer;
 @end
 
@@ -39,25 +39,37 @@
     }
     self.captionTextView.delegate = self;
     self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     
-    if (!self.appeared || [self isMovingToParentViewController] || [self isBeingPresented])
+    if (self.imageHasBeenSelected == NO)
     {
-        self.appeared = YES;
         [self choosePhotoFromLibrary];
-        self.captionTextView.text = [NSString stringWithFormat:@" "];
     }
-    else
-    {
-
-        self.appeared = NO;
-        
-    }
-        
+    
+    
+    
+    
+//    if (!self.appeared || [self isMovingToParentViewController] || [self isBeingPresented])
+//    {
+//        self.appeared = YES;
+//        [self choosePhotoFromLibrary];
+//        self.captionTextView.text = [NSString stringWithFormat:@" "];
+//        self.tabBarController.selectedIndex = 1;
+//    }
+//    else
+//    {
+//
+//        self.appeared = NO;
+//        self.tabBarController.selectedIndex = 0;
+//        
+//    }
+//        
     
 }
 
@@ -99,6 +111,7 @@
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
             }];
+            self.imageHasBeenSelected = NO;
             self.tabBarController.selectedIndex = 3;
             
             
@@ -140,14 +153,16 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.imageView.image = chosenImage;
-    
+    self.imageHasBeenSelected = YES;
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
+    [picker dismissViewControllerAnimated:NO completion:NULL];
+    self.tabBarController.selectedIndex = 0;
+
 }
 @end

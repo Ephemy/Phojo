@@ -17,9 +17,11 @@
 #import "Photo.h"
 #import "Phojer.h"
 #import "Comment.h"
+#import <MessageUI/MessageUI.h> 
+#import <MessageUI/MFMailComposeViewController.h>
 @import Social;
 
-@interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UIWebViewDelegate>
+@interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UIWebViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *postArray;
@@ -28,6 +30,7 @@
 @property (strong, nonatomic) NSMutableArray *totalCommentsArray;
 @property NSString *stringToPass;
 @property Phojer *passedPhojer;
+@property MFMailComposeViewController *mailCount;
 
 @end
 
@@ -41,7 +44,7 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     
     //    self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
-    
+    self.mailCount = [[MFMailComposeViewController alloc]init];
     
     
 }
@@ -86,6 +89,28 @@
 }
 
 
+-(void)sendEmail {
+
+    if([MFMailComposeViewController canSendMail])
+    {
+
+        self.mailCount.mailComposeDelegate = self;
+        [self.mailCount setSubject:@"Email subject"];
+        [self.mailCount setToRecipients:[NSArray arrayWithObject:@"myFriends@email.com"]];
+        [self.mailCount setMessageBody:@"Email message" isHTML:NO];
+
+        [self presentViewController:self.mailCount animated:YES completion:nil];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)onButtonPressed:(UIButton *)sender
+{
+    [self sendEmail];
+}
 
 -(void)alertViewStuff
 {
