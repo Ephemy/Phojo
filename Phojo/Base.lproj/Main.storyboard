@@ -33,18 +33,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ebw-i6-RYE">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebw-i6-RYE">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="ebw-i6-RYE" secondAttribute="trailing" id="Fh7-hh-dRj"/>
-                                            <constraint firstItem="ebw-i6-RYE" firstAttribute="top" secondItem="f4k-e0-gQ9" secondAttribute="top" id="bAZ-bj-Oh3"/>
-                                            <constraint firstItem="ebw-i6-RYE" firstAttribute="leading" secondItem="f4k-e0-gQ9" secondAttribute="leading" id="dAE-ch-Mxn"/>
-                                            <constraint firstAttribute="bottom" secondItem="ebw-i6-RYE" secondAttribute="bottom" id="gUS-4h-9Xb"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="photoImageView" destination="ebw-i6-RYE" id="A4L-by-qi8"/>
                                         </connections>
@@ -56,7 +50,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eY-Yq-qW6">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eY-Yq-qW6">
                                                     <rect key="frame" x="200" y="0.0" width="100" height="15"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -72,7 +66,7 @@
                                                         <segue destination="p5F-XE-mek" kind="show" id="lie-gb-ABH"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-Bo-CHf">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-Bo-CHf">
                                                     <rect key="frame" x="0.0" y="0.0" width="56" height="15"/>
                                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -85,7 +79,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x05-be-psp">
+                                                <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x05-be-psp">
                                                     <rect key="frame" x="0.0" y="28" width="300" height="46"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -95,7 +89,7 @@
                                                         <outlet property="delegate" destination="BYZ-38-t0r" id="O46-eT-E2E"/>
                                                     </connections>
                                                 </webView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7O-n1-USK">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7O-n1-USK">
                                                     <rect key="frame" x="72" y="0.0" width="112" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="16D-Ej-6i7"/>
@@ -109,7 +103,7 @@
                                                         <segue destination="Wj9-ee-sQj" kind="show" id="AAO-2h-Po8"/>
                                                     </connections>
                                                 </button>
-                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4Y-yl-qO3">
+                                                <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4Y-yl-qO3">
                                                     <rect key="frame" x="0.0" y="84" width="300" height="216"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <connections>
@@ -122,15 +116,7 @@
                                         <constraints>
                                             <constraint firstItem="x05-be-psp" firstAttribute="trailing" secondItem="6eY-Yq-qW6" secondAttribute="trailing" id="063-Zb-oqP"/>
                                             <constraint firstItem="I7O-n1-USK" firstAttribute="leading" secondItem="col-Bo-CHf" secondAttribute="trailing" constant="16" id="EWd-ED-Sbc"/>
-                                            <constraint firstItem="col-Bo-CHf" firstAttribute="leading" secondItem="fSz-1p-79L" secondAttribute="leadingMargin" constant="-8" id="FPb-jN-FIK"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="v4Y-yl-qO3" secondAttribute="trailing" constant="-8" id="Fid-dO-Vzx"/>
-                                            <constraint firstItem="6eY-Yq-qW6" firstAttribute="trailing" secondItem="fSz-1p-79L" secondAttribute="trailingMargin" constant="8" id="IRc-dL-8hW"/>
-                                            <constraint firstItem="I7O-n1-USK" firstAttribute="top" secondItem="fSz-1p-79L" secondAttribute="topMargin" constant="-8" id="ISs-H1-ox2"/>
-                                            <constraint firstItem="6eY-Yq-qW6" firstAttribute="top" secondItem="fSz-1p-79L" secondAttribute="topMargin" constant="-8" id="IuX-c6-urN"/>
                                             <constraint firstItem="x05-be-psp" firstAttribute="leading" secondItem="col-Bo-CHf" secondAttribute="leading" id="Kq2-iB-b2i"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="v4Y-yl-qO3" secondAttribute="bottom" constant="-8" id="Rb5-h2-XGo"/>
-                                            <constraint firstItem="v4Y-yl-qO3" firstAttribute="leading" secondItem="fSz-1p-79L" secondAttribute="leadingMargin" constant="-8" id="Sok-9A-yo7"/>
-                                            <constraint firstItem="col-Bo-CHf" firstAttribute="top" secondItem="fSz-1p-79L" secondAttribute="topMargin" constant="-8" id="UZB-6D-FEp"/>
                                             <constraint firstItem="6eY-Yq-qW6" firstAttribute="leading" secondItem="I7O-n1-USK" secondAttribute="trailing" constant="16" id="Wri-5B-AgA"/>
                                             <constraint firstItem="v4Y-yl-qO3" firstAttribute="top" secondItem="x05-be-psp" secondAttribute="bottom" constant="10" id="uTA-Rf-byz"/>
                                             <constraint firstItem="x05-be-psp" firstAttribute="top" secondItem="I7O-n1-USK" secondAttribute="bottom" constant="3" id="ug9-v2-mnC"/>
