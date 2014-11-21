@@ -23,6 +23,8 @@
 @property (strong, nonatomic) NSArray *postArray;
 @property (strong, nonatomic) NSArray *followingArray;
 @property (strong, nonatomic) NSArray *currentCommentsArray;
+@property NSString *stringToPass;
+
 @end
 
 @implementation JVAFeedViewController
@@ -104,7 +106,15 @@
                     
                     //for every post in feed, get comments.
                     for(Post *post in self.postArray)
-                        [self getCommentsForPost:post];
+                        [self getCommentsForPost:post onCompletionHandler:^(NSArray *array) {
+                           
+                            self.currentCommentsArray = array;
+                            
+                            [self.collectionView reloadData];
+                            
+                        }];
+                    //- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
+                    
                     
                 }
                 
@@ -122,7 +132,7 @@
     
 }
 
-- (void) getCommentsForPost: (Post *)post
+- (void) getCommentsForPost: (Post *)post onCompletionHandler:(void (^)(NSArray *array))complete
 {
     
     
@@ -134,12 +144,87 @@
          {
              NSLog(@"%@",error.localizedDescription);
          }else{
-             self.currentCommentsArray = objects;
-             [self.collectionView reloadData];
+             complete(objects);
          }
      }];
 }
 //
+
+//
+//  ViewController.m
+//  TestTagging
+//
+//  Created by Jonathan Chou on 11/20/14.
+//  Copyright (c) 2014 Jonathan Chou. All rights reserved.
+//
+
+
+
+- (NSString *)createTagsFromTextField:(NSString *)string
+//- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
+
+{
+    NSMutableString *theMasterString = [NSMutableString string];
+    
+    int lastPoint = 0;
+    int lastWordLength = 0;
+    NSString *lastString = [NSString string];
+    
+    //    NSString *string = @"hi my name is jon #hashtag ihopethiworks #yolo #swag #nomnom fewfeawfefefefeafew #screwu";
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"@(\\w+)" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(0, string.length)];
+    if(matches.count == 0)
+    {
+        return string;
+    }
+    else
+    {
+    for (NSTextCheckingResult *match in matches) {
+        NSRange wordRange = [match rangeAtIndex:1];
+        NSLog(@"%lu", (unsigned long)wordRange.location);
+        NSString* word = [string substringWithRange:wordRange];
+        NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/%@\">@%@</a> ",word, word];
+        NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
+        
+        lastString = stringURL;
+        //        NSLog(@"Found tag %@", subString);
+        NSLog(@"%@", subString);
+        
+        [theMasterString appendString:subString];
+        [theMasterString appendString:stringURL];
+        
+        lastPoint = (int)wordRange.location;
+        lastWordLength = (int)word.length + 1;
+        
+    }
+    NSLog(@"%@", theMasterString );
+    return theMasterString;
+    }
+//    [self.phojoWebView loadHTMLString:theMasterString baseURL:nil];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if(navigationType == UIWebViewNavigationTypeLinkClicked){
+        
+        NSURL *theURL = request.URL;
+        self.stringToPass = [theURL lastPathComponent];
+        
+//        [self performSegueWithIdentifier:@"poke" sender:self];
+        return NO;
+    }
+    return YES;
+}
+
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    SecondVCViewController *sVC = segue.destinationViewController;
+//    sVC.string = self.stringToPass;
+//}
+
+
+
 
 
 
@@ -268,14 +353,14 @@ shouldBeginLogInWithUsername:(NSString *)username
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return self.postArray.count;
+    return 2;
     
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    Post *post = self.postArray[indexPath.row];
+    Post *post = self.postArray[indexPath.section];
     Photo *photo = post.photo;
     PFFile *imageFile = photo.image;
     
@@ -304,10 +389,17 @@ shouldBeginLogInWithUsername:(NSString *)username
         
         
         JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
-        //        detailCell.commentWebView loadHTMLString:<#(NSString *)#> baseURL:<#(NSURL *)#>
-                for (Comment *comment in self.currentCommentsArray) {
-                    NSLog(@"%@",comment.commentText);
-                }
+        NSMutableString *finalString = [NSMutableString string];
+        
+        for (Comment *comment in self.currentCommentsArray) {
+            NSLog(@"%@",comment.commentText);
+            NSString *resultString = [self createTagsFromTextField:comment.commentText];
+
+            [finalString appendString:resultString];
+            [finalString appendString: @"</br>"];
+        }
+       
+        [detailCell.commentWebView loadHTMLString:finalString baseURL:nil];
         
         return detailCell;
     }
