@@ -16,7 +16,7 @@
 #import "Phojer.h"
 @import Social;
 
-@interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
+@interface JVAFeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *postArray;
@@ -30,6 +30,7 @@
     [super viewDidLoad];
 //    [PFUser logOut];
     self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
+    
     
     
 }
@@ -266,8 +267,8 @@ shouldBeginLogInWithUsername:(NSString *)username
 
 
     
-//    if (indexPath.row == 0)
-//    {
+    if (indexPath.row == 0)
+    {
         JVAPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
         {
@@ -285,15 +286,15 @@ shouldBeginLogInWithUsername:(NSString *)username
         
 
     }
-//    else
-//    {
-//        JVAPhotoCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
-//        detailCell.c
-//        return detailCell;
-//    }
-//    
+    else
+    {
+        JVAPostDetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detailCell" forIndexPath:indexPath];
+//        [detailCell.captionWebView loadHTMLString:@"Test test test"];
+        return detailCell;
+    }
     
 
+}
 
 
 - (IBAction)unwindFromCommentVC:(UIStoryboardSegue *)sender
@@ -302,3 +303,21 @@ shouldBeginLogInWithUsername:(NSString *)username
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -91,10 +91,16 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="46" id="vk9-iY-Ufr"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="BYZ-38-t0r" id="O46-eT-E2E"/>
+                                                    </connections>
                                                 </webView>
                                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4Y-yl-qO3">
                                                     <rect key="frame" x="0.0" y="84" width="300" height="216"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="BYZ-38-t0r" id="BSm-so-04z"/>
+                                                    </connections>
                                                 </webView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7O-n1-USK">
                                                     <rect key="frame" x="72" y="0.0" width="112" height="25"/>
@@ -217,7 +223,6 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="thumbnailImageView" destination="RAd-yW-iph" id="KXG-uI-vi8"/>
-                                            <outletCollection property="gestureRecognizers" destination="TgV-jK-zcw" appends="YES" id="Vrp-T2-NvS"/>
                                             <segue destination="4C2-xv-GMN" kind="show" identifier="postSegue" id="P0i-x4-inb"/>
                                         </connections>
                                     </collectionViewCell>
@@ -229,12 +234,16 @@
                             </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="da0-40-RpM">
                                 <rect key="frame" x="16" y="72" width="128" height="128"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="7Yh-ct-cto"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="V8h-ul-mgn"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="aW9-Bm-f86"/>
                                     <constraint firstAttribute="width" constant="128" id="nkS-io-rQa"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="TgV-jK-zcw" appends="YES" id="1xz-Tk-0dP"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvz-70-diu">
                                 <rect key="frame" x="162" y="179" width="280" height="21"/>
@@ -479,7 +488,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWI-GY-4zf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWI-GY-4zf">
                                 <rect key="frame" x="0.0" y="126" width="600" height="349"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -496,7 +505,7 @@
                                     <outlet property="delegate" destination="p5F-XE-mek" id="d2a-Cc-8Y2"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Jq5-ff-idC">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Jq5-ff-idC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -529,6 +538,16 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zWI-GY-4zf" firstAttribute="top" secondItem="hWU-dD-Y19" secondAttribute="bottom" constant="62" id="4Oc-xh-EXh"/>
+                            <constraint firstItem="Jq5-ff-idC" firstAttribute="top" secondItem="q6J-na-dk8" secondAttribute="topMargin" id="Cw6-Mm-YBx"/>
+                            <constraint firstItem="zWI-GY-4zf" firstAttribute="leading" secondItem="q6J-na-dk8" secondAttribute="leadingMargin" constant="-16" id="DU2-dQ-ycO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jq5-ff-idC" secondAttribute="trailing" constant="-16" id="I4C-dQ-vO4"/>
+                            <constraint firstItem="vKE-GG-QXz" firstAttribute="top" secondItem="Jq5-ff-idC" secondAttribute="bottom" id="Snt-Sf-tjl"/>
+                            <constraint firstItem="Jq5-ff-idC" firstAttribute="leading" secondItem="q6J-na-dk8" secondAttribute="leadingMargin" constant="-16" id="qQ6-ne-cfB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zWI-GY-4zf" secondAttribute="trailing" constant="-16" id="qTy-vR-G3P"/>
+                            <constraint firstItem="vKE-GG-QXz" firstAttribute="top" secondItem="zWI-GY-4zf" secondAttribute="bottom" constant="125" id="zfk-Qi-05r"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="commentTextField" destination="gUb-1x-pVt" id="Xog-iY-Ric"/>
