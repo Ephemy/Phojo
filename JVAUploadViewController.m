@@ -37,7 +37,7 @@
         [myAlertView show];
         
     }
-    
+    self.captionTextView.delegate = self;
     self.currentPhojer = [[PFUser currentUser] objectForKey:@"phojer"];
 }
 
@@ -59,6 +59,15 @@
     }
         
     
+}
+
+- (BOOL) textView: (UITextView*) textView shouldChangeTextInRange: (NSRange) range replacementText: (NSString*) text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [self.captionTextView resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
 
 - (IBAction)onUploadButtonPressed:(UIButton *)sender
