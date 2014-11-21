@@ -33,8 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    [PFUser logOut];
-    
+//        [PFUser logOut];
+
     self.collectionView.backgroundColor = [UIColor clearColor];
 
     self.currentPhojer = [[PFUser currentUser]objectForKey:@"phojer"];
@@ -56,16 +56,32 @@
     else{
         //        [self alertViewStuff];
     }
-    
-    [self queryAndLoad];
-    
+
+    if (self.passedPost)
+    {
+        self.postArray = @[self.passedPost];
+
+        //for every post in feed, get comments.
+        [self getCommentsForPost:self.passedPost onCompletionHandler:^(NSArray *array) {
+
+            self.currentCommentsArray = array;
+
+            [self.collectionView reloadData];
+
+        }];
+    }
+    else
+    {
+        [self queryAndLoad];
+    }
+
 }
 
 
 
 -(void)alertViewStuff
 {
-    
+
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:@"Welcome to Phojo! Here's a Quick Introduction to get you started :)" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *welcomeButton = [UIAlertAction actionWithTitle:@"Great, Let's get started~~~~~" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
