@@ -257,11 +257,82 @@
             lastWordLength = (int)word.length + 1;
             
         }
+        
+        //in case there is text after the @mention
+        NSString *lastSubString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, string.length - lastPoint - lastWordLength )];
+        NSLog(@"%@", lastSubString);
+        if(lastSubString != nil)
+        {
+            [theMasterString appendString:lastSubString];
+        }
         NSLog(@"%@", theMasterString );
+        theMasterString = [self createHashTagsFromTextField:theMasterString];
         return theMasterString;
     }
     //    [self.phojoWebView loadHTMLString:theMasterString baseURL:nil];
 }
+
+//same scan for hashtags
+- (NSMutableString *)createHashTagsFromTextField:(NSMutableString *)string
+
+{
+    
+    //the string to rule them all - string initiation
+    NSMutableString *theMasterString = [NSMutableString string];
+    
+    //save the indices of the string while scanning to concatenate later
+    int lastPoint = 0;
+    int lastWordLength = 0;
+    NSString *lastString = [NSString string];
+    
+    //creates a regex filter to search for substrings that begin with @
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"#(\\w+)" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(0, string.length)];
+    
+    //if there are no @mentions then just return original string
+    if(matches.count == 0)
+    {
+        return string;
+    }
+    
+    //otherwise iterate through and wrap the code into html format
+    else
+    {
+        for (NSTextCheckingResult *match in matches) {
+            NSRange wordRange = [match rangeAtIndex:1];
+            NSLog(@"%lu", (unsigned long)wordRange.location);
+            NSString* word = [string substringWithRange:wordRange];
+            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/%@\">#%@</a> ",word, word];
+            
+            //keep track of code that is not @mentions for merging later
+            NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
+            
+            lastString = stringURL;
+            NSLog(@"%@", subString);
+            
+            //finish appending strings
+            [theMasterString appendString:subString];
+            [theMasterString appendString:stringURL];
+            
+            //keeps track
+            lastPoint = (int)wordRange.location;
+            lastWordLength = (int)word.length + 1;
+            
+        }
+        NSLog(@"%@", theMasterString );
+        NSString *lastSubString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, string.length - lastPoint - lastWordLength )];
+        NSLog(@"%@", lastSubString);
+        if(lastSubString != nil)
+        {
+            [theMasterString appendString:lastSubString];
+        }
+        return theMasterString;
+    }
+    //    [self.phojoWebView loadHTMLString:theMasterString baseURL:nil];
+}
+
+
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
