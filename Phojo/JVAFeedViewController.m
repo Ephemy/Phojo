@@ -235,7 +235,8 @@
     //if there are no @mentions then just return original string
     if(matches.count == 0)
     {
-        return string;
+        NSMutableString *result = [self createHashTagsFromTextField:[string mutableCopy]];
+        return result;
     }
     
     //otherwise iterate through and wrap the code into html format
@@ -245,7 +246,7 @@
             NSRange wordRange = [match rangeAtIndex:1];
             NSLog(@"%lu", (unsigned long)wordRange.location);
             NSString* word = [string substringWithRange:wordRange];
-            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/%@\">@%@</a> ",word, word];
+            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://comments/comments/%@\">@%@</a> ",word, word];
             
             //keep track of code that is not @mentions for merging later
             NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
@@ -308,7 +309,7 @@
             NSRange wordRange = [match rangeAtIndex:1];
             NSLog(@"%lu", (unsigned long)wordRange.location);
             NSString* word = [string substringWithRange:wordRange];
-            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/%@\">#%@</a> ",word, word];
+            NSString *stringURL = [NSString stringWithFormat:@"<a href=\"insta://hashtag/hashtag/%@\">#%@</a> ",word, word];
             
             //keep track of code that is not @mentions for merging later
             NSString *subString = [string substringWithRange:NSMakeRange(lastPoint + lastWordLength, wordRange.location - lastPoint - 1 - lastWordLength )];
@@ -344,7 +345,12 @@
     //on link clicked
     if(navigationType == UIWebViewNavigationTypeLinkClicked){
         
+        
         NSURL *theURL = request.URL;
+        
+        if([[theURL pathComponents][1] isEqualToString:@"comments"])
+        {
+        
         self.stringToPass = [theURL lastPathComponent];
         
         PFQuery *query = [Phojer query];
@@ -359,6 +365,7 @@
             
             
         }];
+        }
         
         return NO;
     }
@@ -526,9 +533,12 @@ shouldBeginLogInWithUsername:(NSString *)username
         
         NSMutableString *captionString = [NSMutableString string];
         Post *captionPost = self.postArray[indexPath.section];
+        NSString *modifiedString = captionPost.caption;
+        
+        NSString *inputCaption = [self createTagsFromTextField:modifiedString];
 
         [captionString appendString:@"<font face=\"helvetica\">"];
-        [captionString appendString:captionPost.caption];
+        [captionString appendString:inputCaption];
         [captionString appendString:@"</font>"];
 
 
