@@ -117,16 +117,32 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.phojers.count;
+
+    if (self.searchToggle.selectedSegmentIndex == 0)
+    {
+        return self.phojers.count;
+    }
+    else
+    {
+        return self.hashtags.count;
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-    Phojer *phojer = self.phojers[indexPath.row];
-    cell.textLabel.text = phojer.name;
-    cell.detailTextLabel.text = phojer.username;
+    if (self.searchToggle.selectedSegmentIndex == 0)
+    {
+        Phojer *phojer = self.phojers[indexPath.row];
+        cell.textLabel.text = phojer.name;
+        cell.detailTextLabel.text = phojer.username;
+    }
+    else
+    {
+        cell.textLabel.text = [NSString stringWithFormat:@"#%@", self.hashtags[indexPath.row]];
+    }
 
     return cell;
 }
@@ -184,7 +200,6 @@
         PFQuery *query = [Post query];
         [query whereKey:@"tags" containsString:searchText];
 
-        [query includeKey:@"photo"];
 
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
@@ -201,7 +216,9 @@
                         [self.hashtags addObject:searchText];
                     }
                 }
-                
+
+                [self.tableView reloadData];
+
             }
         }];
 
