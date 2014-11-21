@@ -95,13 +95,6 @@
                                                         <outlet property="delegate" destination="BYZ-38-t0r" id="O46-eT-E2E"/>
                                                     </connections>
                                                 </webView>
-                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4Y-yl-qO3">
-                                                    <rect key="frame" x="0.0" y="84" width="300" height="216"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="BYZ-38-t0r" id="BSm-so-04z"/>
-                                                    </connections>
-                                                </webView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7O-n1-USK">
                                                     <rect key="frame" x="72" y="0.0" width="112" height="25"/>
                                                     <constraints>
@@ -116,6 +109,13 @@
                                                         <segue destination="Wj9-ee-sQj" kind="show" id="AAO-2h-Po8"/>
                                                     </connections>
                                                 </button>
+                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4Y-yl-qO3">
+                                                    <rect key="frame" x="0.0" y="84" width="300" height="216"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="BYZ-38-t0r" id="BSm-so-04z"/>
+                                                    </connections>
+                                                </webView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
